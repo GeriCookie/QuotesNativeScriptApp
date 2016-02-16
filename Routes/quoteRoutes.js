@@ -7,10 +7,10 @@ var auth = function() {
   });
 };
 
-var routes = function(User, Quote) {
+var routes = function(User, Quote, Update) {
   var quoteRouter = express.Router();
 
-  var quoteController = require('../Controllers/quoteController')(User, Quote);
+  var quoteController = require('../Controllers/quoteController')(User, Quote, Update);
 
   quoteRouter.get('/', quoteController.get)
     .post('/', auth(), quoteController.post)

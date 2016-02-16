@@ -1,7 +1,8 @@
 require('../polyfills/array');
-var quoteController = function(User, Quote) {
+var quoteController = function(User, Quote, Update) {
   var post = function(req, res) {
     var quote = new Quote(req.body);
+    var user = req.user;
 
     Quote.findOne({
       text: quote.text
@@ -18,6 +19,22 @@ var quoteController = function(User, Quote) {
         if (err) {
           throw err;
         }
+        var newUpdate = new Update({
+          text: user.username + ' added new quote.',
+          date: new Date(),
+          user: {
+            username: user.username,
+            userImageUrl: user.userImageUrl,
+            userId: user._id
+          },
+          quote: {
+            text: quote.text,
+            author: quote.author,
+            authorImageUrl: quote.authorImageUrl, //must have dedault!!!!
+            tags: quote.tags
+          }
+        });
+        newUpdate.save();
         res.status(201).send(quote);
       });
     });
@@ -118,6 +135,7 @@ var quoteController = function(User, Quote) {
         if (!quote.favoritesCount) {
           quote.favoritesCount = 0;
         }
+        //bug, the counter will erase to the end of the world...
         quote.favoritesCount++;
 
         quote.save(function() {
@@ -133,9 +151,27 @@ var quoteController = function(User, Quote) {
               _id: quote._id,
               author: quote.author,
               authorImageUrl: quote.authorImageUrl,
-              favoriteQuotes: quote.favoritesCount
+              favoritesCount: quote.favoritesCount
             });
-            user.save();
+            user.save(function() {
+              var newUpdate = new Update({
+                text: user.username + ' added to favorites:',
+                date: new Date(),
+                user: {
+                  username: user.username,
+                  userImageUrl: user.userImageUrl,
+                  userId: user._id
+                },
+                quote: {
+                  text: quote.text,
+                  _id: quote._id,
+                  author: quote.author,
+                  authorImageUrl: quote.authorImageUrl,
+                  favoritesCount: quote.favoritesCount
+                }
+              });
+              newUpdate.save();
+            });
           }
           res.json({
             result: quote

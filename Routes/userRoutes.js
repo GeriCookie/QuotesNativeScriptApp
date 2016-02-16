@@ -54,7 +54,8 @@ var routes = function(User) {
           res.json({
             nickname: user.nickname,
             favoriteQuotes: user.favoriteQuotes,
-            friends: user.friends
+            friends: user.friends,
+            userImageUrl: user.userImageUrl
           });
         } else {
           res.status(404).send('no user found');
@@ -73,8 +74,7 @@ var routes = function(User) {
         if (!user.friends) {
           user.friends = [];
         }
-        console.log(user._id);
-        console.log(currentUser._id);
+
         if (user._id.toString() === currentUser._id.toString()) {
           res.status(500).send({
             message: "You cannot add yourself to friends"

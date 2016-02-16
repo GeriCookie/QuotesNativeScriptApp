@@ -25,10 +25,10 @@ var db = mongoose.connect('mongodb://localhost/quotes');
 
 var User = require('./models/userModel');
 var Quote = require('./models/quoteModel');
+var Update = require('./models/updateModel');
 
 var app = express();
 var port = process.env.PORT || 3000;
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -36,7 +36,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 var userRouter = require('./Routes/userRoutes')(User);
-var quoteRouter = require('./Routes/quoteRoutes')(User, Quote);
+var quoteRouter = require('./Routes/quoteRoutes')(User, Quote, Update);
+
 
 app.use('/api/users', userRouter);
 app.use('/api/quotes', quoteRouter);
