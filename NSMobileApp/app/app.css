@@ -1,0 +1,49 @@
+﻿.title {
+    font-size: 30;
+    horizontal-align: center;
+    margin: 20;
+}
+
+button {
+    font-size: 16;
+    horizontal-align: center;
+    margin: 5;
+}
+
+.message {
+    font-size: 20;
+    color: #284848;
+    horizontal-align: center;
+}
+
+.quote {
+	margin-top: 50;
+	font-size: 30;
+	font-style: italic;
+}
+
+.author {
+	font-size: 12;
+	font-style: italic;
+	horizontal-align: right;
+	margin-bottom: 50;
+}
+
+stackLayout {
+	margin: 10;
+}
+
+.listView-quoteText {
+	font-size: 16;
+	horizontal-align: left;
+}
+
+.listView-author {
+	font-size: 12;
+	horizontal-align: right;
+}
+
+.listView-image {
+	vertical-align: center;
+	horizontal-align: center;
+}
