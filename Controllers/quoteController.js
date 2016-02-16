@@ -24,9 +24,15 @@ var quoteController = function(User, Quote) {
   };
 
   var get = function(req, res) {
-    var page = +req.query.page | 1;
-    var size = +req.query.size | 10;
-
+    var page = +req.query.page;
+    var size = +req.query.size;
+    if (!size) {
+      size = 10;
+    }
+    if (!page) {
+      page = 1;
+    }
+    console.log(size);
     Quote.find()
       .exec(function(err, quotes) {
         if (err) {
@@ -49,7 +55,8 @@ var quoteController = function(User, Quote) {
               text: quote.text,
               author: quote.author,
               authorImageUrl: quote.authorImageUrl,
-              tags: quote.tags
+              tags: quote.tags,
+              favoritesCount: quote.favoritesCount
             };
           });
           res.json({
@@ -59,7 +66,31 @@ var quoteController = function(User, Quote) {
   };
 
 var getById = function(req, res) {
+  Quote.findById(req.params.id)
+    .exec(function(err, quote) {
+      if (err) {
+       return res.status(500)
+        .send(err);
+      }
+      if (!quote) {
+        return res.status(404)
+        .send({
+          message: "Quote not found"
+        });
+      }
 
+      var quoteDetails = {
+          _id: quote._id,
+          text: quote.text,
+          author: quote.author,
+          tags: quote.tags,
+          authorImageUrl: quote.authorImageUrl,
+          favoritesCount: quote.favoritesCount
+      };
+      res.send({
+        result: quoteDetails
+      });
+    });
 };
   return {
     post: post,
