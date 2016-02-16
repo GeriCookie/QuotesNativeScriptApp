@@ -47,6 +47,13 @@ var quoteController = function(User, Quote) {
             }));
           });
         }
+        //not working
+        if (req.params.author) {
+          var author = req.params.author.toLowerCase();
+          quotes = quotes.filter(function(quote) {
+            return quote.author.toLowerCase() === author;
+          });
+        }
 
         quotes = quotes.slice((page - 1) * size, page * size)
           .map(quote => {
@@ -59,43 +66,89 @@ var quoteController = function(User, Quote) {
               favoritesCount: quote.favoritesCount
             };
           });
-          res.json({
-            result: quotes
-          });
+        res.json({
+          result: quotes
+        });
       });
   };
 
-var getById = function(req, res) {
-  Quote.findById(req.params.id)
-    .exec(function(err, quote) {
-      if (err) {
-       return res.status(500)
-        .send(err);
-      }
-      if (!quote) {
-        return res.status(404)
-        .send({
-          message: "Quote not found"
-        });
-      }
+  var getById = function(req, res) {
+    Quote.findById(req.params.id)
+      .exec(function(err, quote) {
+        if (err) {
+          return res.status(500)
+            .send(err);
+        }
+        if (!quote) {
+          return res.status(404)
+            .send({
+              message: "Quote not found"
+            });
+        }
 
-      var quoteDetails = {
+        var quoteDetails = {
           _id: quote._id,
           text: quote.text,
           author: quote.author,
           tags: quote.tags,
           authorImageUrl: quote.authorImageUrl,
           favoritesCount: quote.favoritesCount
-      };
-      res.send({
-        result: quoteDetails
+        };
+        res.send({
+          result: quoteDetails
+        });
       });
-    });
-};
+  };
+
+  var addToFavorites = function(req, res) {
+    var user = req.user;
+    Quote.findById(req.params.id)
+      .exec(function(err, quote) {
+        if (err) {
+          return res.status(500)
+            .send(err);
+        }
+        if (!quote) {
+          return res.status(404)
+            .send({
+              message: "Quote not found"
+            });
+        }
+
+        if (!quote.favoritesCount) {
+          quote.favoritesCount = 0;
+        }
+        quote.favoritesCount++;
+
+        quote.save(function() {
+          if (!user.favoriteQuotes) {
+            user.favoriteQuotes = [];
+          }
+          var index = user.favoriteQuotes.findIndex(favQoute => favQoute._id.toString() === quote._id.toString());
+          if (index < 0) {
+
+
+            user.favoriteQuotes.push({
+              text: quote.text,
+              _id: quote._id,
+              author: quote.author,
+              authorImageUrl: quote.authorImageUrl,
+              favoriteQuotes: quote.favoritesCount
+            });
+            user.save();
+          }
+          res.json({
+            result: quote
+          });
+        });
+      });
+  };
+
   return {
     post: post,
     get: get,
-    getById: getById
+    getById: getById,
+    addToFavorites: addToFavorites
   };
 };
 

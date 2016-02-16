@@ -14,7 +14,8 @@ var routes = function(User, Quote) {
 
   quoteRouter.get('/', quoteController.get)
     .post('/', auth(), quoteController.post)
-    .get('/:id', quoteController.getById);
+    .get('/:id', quoteController.getById)
+    .put('/:id', auth(), quoteController.addToFavorites);
 
   return quoteRouter;
 };

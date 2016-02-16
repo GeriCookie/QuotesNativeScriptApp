@@ -6,7 +6,8 @@ var userModel = new Schema({
   nickname: String,
   passHash: String,
   token: String,
-  friends: [Schema.Types.Mixed]
+  friends: [Schema.Types.Mixed],
+  favoriteQuotes: [Schema.Types.Mixed]
 });
 
 module.exports = mongoose.model('User', userModel);
