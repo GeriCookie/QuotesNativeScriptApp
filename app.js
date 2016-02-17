@@ -37,10 +37,12 @@ app.use(bodyParser.urlencoded({
 
 var userRouter = require('./Routes/userRoutes')(User);
 var quoteRouter = require('./Routes/quoteRoutes')(User, Quote, Update);
-
+var updateRouter = require('./Routes/updateRoutes')(User, Quote, Update);
 
 app.use('/api/users', userRouter);
 app.use('/api/quotes', quoteRouter);
+app.use('/api/updates', updateRouter);
+
 app.get('/profile',
   passport.authenticate('bearer', {
     session: false
