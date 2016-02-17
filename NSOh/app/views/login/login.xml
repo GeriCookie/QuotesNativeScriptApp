@@ -2,7 +2,7 @@
     <page.actionBar>
         <action-bar title="QuotesApp">
             <action-bar.actionItems>
-                <action-item text="Share" tap="share" ios.position="right" />
+                <action-item text="Home" tap="goToInitial" ios.position="right" />
             </action-bar.actionItems>
         </action-bar>
     </page.actionBar>

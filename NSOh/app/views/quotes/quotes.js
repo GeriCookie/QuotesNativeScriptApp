@@ -9,7 +9,7 @@ var topmost;
 var quotesListView;
 
 function pageLoaded(args) {
-    page = args.object; 
+    page = args.object;
 
     quotesListView = view.getViewById(page, "quotesListView");
 
@@ -21,14 +21,14 @@ function pageLoaded(args) {
     };
 
     var quote2 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
+        quoteText: "\"Another very clever writing.\"",
         author: "Martin Luther King Jr.",
         authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
         shared: false
     };
 
     var quote3 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
+        quoteText: "\"This one is the bes one.\"",
         author: "Martin Luther King Jr.",
         authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
         shared: true
@@ -121,7 +121,24 @@ function quotesListItemTap(args) {
     quotesListView.refresh();
 }
 
+function goToInitial() {
+    topmost.navigate("views/initial/initial");
+}
+
+function onSwipeEnded(args) {
+    var itemIndex = args.itemIndex;
+    var selectedItem = quotesFakeVm.quotesList.getItem(itemIndex);
+    var navigationEntry = {
+        moduleName: "views/quote-details/quote-details",
+        context: selectedItem,
+        animated: true
+    };
+    topmost.navigate(navigationEntry);
+}
+
 exports.pageLoaded = pageLoaded;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.quotesListItemTap = quotesListItemTap;
+exports.goToInitial = goToInitial;
+exports.onSwipeEnded = onSwipeEnded;

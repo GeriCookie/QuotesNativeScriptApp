@@ -1,6 +1,9 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" loaded="pageLoaded">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" navigatedTo="onNavigatedTo">
     <page.actionBar>
         <action-bar title="QuotesApp">
+            <action-bar.actionItems>
+                <action-item text="Home" tap="goToInitial" ios.position="right" />
+            </action-bar.actionItems>
         </action-bar>
     </page.actionBar>
     <drawer:rad-side-drawer id="drawer" drawerLocation="Left">

@@ -36,8 +36,13 @@ function goToQuotesList() {
     topmost.navigate("views/quotes/quotes");
 }
 
+function goToInitial() {
+	topmost.navigate("views/initial/initial");
+}
+
 exports.pageLoaded = pageLoaded;
 exports.goToRegister = goToRegister;
 exports.login = login;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
+exports.goToInitial = goToInitial;

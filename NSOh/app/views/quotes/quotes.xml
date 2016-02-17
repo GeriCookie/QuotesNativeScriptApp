@@ -1,8 +1,8 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" loaded="pageLoaded">
+<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" xmlns:lv="nativescript-telerik-ui/listview" loaded="pageLoaded">
     <page.actionBar>
         <action-bar title="QuotesApp">
             <action-bar.actionItems>
-                <action-item text="Share" tap="share" ios.position="right" />
+                <action-item text="Home" tap="goToInitial" ios.position="right" />
             </action-bar.actionItems>
         </action-bar>
     </page.actionBar>
@@ -11,26 +11,32 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <GridLayout>
-                <ListView items="{{ quotesList }}" itemTap="quotesListItemTap" id="quotesListView">
-                    <stackLayout.itemTemplate>
-                        <GridLayout rows="2*, *" columns="2*, 7*, 1*" class="quote-grid-cell">
-                            <Image src="{{authorImageUrl}}" stretch="none" row="0" col="0" rowSpan="2" class="listView-image" />
-                            <Label text="{{quoteText}}" textWrap="true" row="0" col="1" class="listView-quoteText" />
-                            <Label text="{{author}}" textWrap="true" row="1" col="1" class="listView-author" />
-                            <Label text='{{shared ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" />
-                        </GridLayout>
-                    </stackLayout.itemTemplate>
-                </ListView>
-            </GridLayout>
+            <lv:RadListView items="{{ quotesList }}" swipeCells="true" itemSwipeProgressEnded="onSwipeEnded" itemTap="quotesListItemTap" id="quotesListView">
+                <lv:RadListView.listViewLayout>
+                    <lv:ListViewLinearLayout scrollDirection="Vertical" />
+                </lv:RadListView.listViewLayout>
+                <lv:RadListView.itemTemplate>
+                    <GridLayout rows="2*, *" columns="2*, 7*, 1*" class="quote-grid-cell">
+                        <Image src="{{authorImageUrl}}" stretch="none" row="0" col="0" rowSpan="2" class="listView-image" />
+                        <Label text="{{quoteText}}" textWrap="true" row="0" col="1" class="listView-quoteText" />
+                        <Label text="{{author}}" textWrap="true" row="1" col="1" class="listView-author" />
+                        <Label text='{{shared ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" />
+                    </GridLayout>
+                </lv:RadListView.itemTemplate>
+                <lv:RadListView.itemSwipeTemplate>
+                    <GridLayout columns="1*, 8*">
+                        <Button col="0" style="background-color: green;" />
+                    </GridLayout>
+                </lv:RadListView.itemSwipeTemplate>
+            </lv:RadListView>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
             <stackLayout rows="auto, *, auto" id="drawer-content">
-                <Button text="explore all quotes" tap="goToQuotesList" class="drowerBtn"/>
-                <Button text="shared by others" tap="goToQuotesList" class="drowerBtn"/>
-                <Button text="my followings" tap="goToQuotesList" class="drowerBtn"/>
-                <Button text="my quotes" tap="goToQuotesList" class="drowerBtn"/>
-                <Button text="log in" tap="goToLogin" class="drowerBtn"/>
+                <Button text="explore all quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Button text="shared by others" tap="goToQuotesList" class="drowerBtn" />
+                <Button text="my followings" tap="goToQuotesList" class="drowerBtn" />
+                <Button text="my quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Button text="log in" tap="goToLogin" class="drowerBtn" />
             </stackLayout>
         </drawer:rad-side-drawer.drawerContent>
     </drawer:rad-side-drawer>
