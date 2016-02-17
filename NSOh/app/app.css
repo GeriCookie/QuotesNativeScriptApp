@@ -59,3 +59,15 @@ stackLayout {
 	vertical-align: center;
 	horizontal-align: center;
 }
+
+.listView-icon {
+	font-family: fontawesome-webfont;
+	font-size: 25;
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+.quote-grid-cell {
+	padding-top: 10;
+	padding-bottom: 5;
+}

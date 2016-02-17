@@ -12,12 +12,13 @@
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
             <GridLayout>
-                <ListView items="{{ quotesList }}">
+                <ListView items="{{ quotesList }}" itemTap="quotesListItemTap" id="quotesListView">
                     <stackLayout.itemTemplate>
-                        <GridLayout rows="2*, *" columns="*, 4*" class="quote-grid-cell">
+                        <GridLayout rows="2*, *" columns="2*, 7*, 1*" class="quote-grid-cell">
                             <Image src="{{authorImageUrl}}" stretch="none" row="0" col="0" rowSpan="2" class="listView-image" />
                             <Label text="{{quoteText}}" textWrap="true" row="0" col="1" class="listView-quoteText" />
                             <Label text="{{author}}" textWrap="true" row="1" col="1" class="listView-author" />
+                            <Label text='{{shared ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" />
                         </GridLayout>
                     </stackLayout.itemTemplate>
                 </ListView>
