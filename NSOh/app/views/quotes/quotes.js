@@ -36,5 +36,15 @@ function tap() {
     alert(quotesFakeVm.quotesList[0].quoteText);
 }
 
+function goToLogin() {
+    topmost.navigate("views/login/login");
+}
+
+function goToQuotesList() {
+    topmost.navigate("views/quotes/quotes");
+}
+
 exports.pageLoaded = pageLoaded;
 exports.tap = tap;
+exports.goToLogin = goToLogin;
+exports.goToQuotesList = goToQuotesList;

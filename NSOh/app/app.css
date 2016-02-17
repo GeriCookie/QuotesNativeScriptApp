@@ -10,6 +10,18 @@ button {
     margin: 5;
 }
 
+.drowerBtn {
+	horizontal-align: left;
+	background-color: transparent;
+	border-width: 0;
+	border-color: transparent;
+	margin: 0;
+}
+
+.drowerContainer {
+	width: 200;
+}
+
 .message {
     font-size: 20;
     color: #284848;

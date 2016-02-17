@@ -1,9 +1,0 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  <StackLayout>
-  	<Label text="log in" textWrap="true" class="title" />
-    <TextField id="login" hint="Your email" text="{{ email }}" keyboardType="email" autocorrect="false" />
-    <TextField id="password" hint="Your password" text="{{ password }}" secure="true" />
-    <TextField id="image" hint="Your image URL" text="{{ imageUrl }}" />
-    <Button text="register with us" tap="register" />
-  </StackLayout>
-</Page>

@@ -1,6 +1,8 @@
 var UserViewModel = require("../../view-models/user-view-model");
+var frameModule = require("ui/frame");
 var user;
 var page;
+var topmost;
 
 function pageLoaded(args) {
     page = args.object;
@@ -12,6 +14,8 @@ function pageLoaded(args) {
 	});
 
     page.bindingContext = user;
+
+    topmost = frameModule.topmost();
 }
 
 function register() {
@@ -21,5 +25,15 @@ function register() {
 		});
 }
 
+function goToLogin() {
+    topmost.navigate("views/login/login");
+}
+
+function goToQuotesList() {
+    topmost.navigate("views/quotes/quotes");
+}
+
 exports.pageLoaded = pageLoaded;
 exports.register = register;
+exports.goToLogin = goToLogin;
+exports.goToQuotesList = goToQuotesList;
