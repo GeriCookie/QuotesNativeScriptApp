@@ -6,7 +6,9 @@ function Quote(info) {
     var quoteViewModel = new Observable({
         quoteText: info.quoteText || "",
         author: info.author || "",
-        authorImageUrl: info.authorImageUrl || ""
+        authorImageUrl: info.authorImageUrl || "",
+        tags: info.tags || "",
+        shared: info.shared || false
     });
 
     quoteViewModel.createNew = function() {
