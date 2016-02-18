@@ -1,5 +1,6 @@
 var QuoteViewModel = require("../../view-models/quote-view-model");
 var frameModule = require("ui/frame");
+var quotesData = require("../../shared/quotes-data");
 var quote;
 var page;
 var topmost;
@@ -27,6 +28,17 @@ function goToQuotesList() {
     topmost.navigate("views/quotes/quotes");
 }
 
+function goToShared() {
+    var sharedQuotes = quotesData.shared();
+    var navigationEntry = {
+        moduleName: "views/quotes/quotes",
+        context: sharedQuotes,
+        animated: true
+    };
+    topmost.navigate(navigationEntry);
+}
+
 exports.pageLoaded = pageLoaded;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
+exports.goToShared = goToShared;

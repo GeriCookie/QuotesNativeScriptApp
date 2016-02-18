@@ -3,117 +3,34 @@ var Observable = require("data/observable").Observable;
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
+var quotesData = require("../../shared/quotes-data");
 var quotesFakeVm;
 var page;
 var topmost;
 var quotesListView;
 
-function pageLoaded(args) {
+function onNavigatedTo(args) {
     page = args.object;
-
     quotesListView = view.getViewById(page, "quotesListView");
-
-    var quote = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: true,
-        tags: "freedom"
-    };
-
-    var quote2 = {
-        quoteText: "\"Another very clever writing.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: true,
-        tags: "fight"
-    };
-
-    var quote3 = {
-        quoteText: "\"This one is the best one.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: true,
-        tags: "luck"
-    };
-
-    var quote4 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: false,
-        tags: "fight"
-    };
-
-    var quote5 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: false,
-        tags: "fight"
-    };
-
-    var quote6 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: false,
-        tags: "fight"
-    };
-
-    var quote7 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: true,
-        tags: "freedom"
-    };
-
-    var quote8 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: false,
-        tags: "freedom"
-    };
-
-    var quote9 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: true,
-        tags: "freedom"
-    };
-
-    var quote10 = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        authorImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: false,
-        tags: "freedom"
-    };
-
-    var list = [];
-    list.push(quote);
-    list.push(quote2);
-    list.push(quote3);
-    list.push(quote4);
-    list.push(quote5);
-    list.push(quote6);
-    list.push(quote7);
-    list.push(quote8);
-    list.push(quote9);
-    list.push(quote10);
+    
+    var list;
+    if (page.navigationContext) {
+        list = page.navigationContext;
+    } else {
+        list = quotesData.all;
+    }
 
     var quotesList = new ObservableArray(list);
-
-
     quotesFakeVm = new Observable({
         quotesList: quotesList
     });
     page.bindingContext = quotesFakeVm;
 
     topmost = frameModule.topmost();
+}
+
+function pageLoaded(args) {
+    
 }
 
 function goToLogin() {
@@ -145,9 +62,20 @@ function onSwipeEnded(args) {
     topmost.navigate(navigationEntry);
 }
 
-exports.pageLoaded = pageLoaded;
+function goToShared() {
+    var sharedQuotes = quotesData.shared();
+    var navigationEntry = {
+        moduleName: "views/quotes/quotes",
+        context: sharedQuotes,
+        animated: true
+    };
+    topmost.navigate(navigationEntry);
+}
+
+exports.onNavigatedTo = onNavigatedTo;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.quotesListItemTap = quotesListItemTap;
 exports.goToInitial = goToInitial;
 exports.onSwipeEnded = onSwipeEnded;
+exports.goToShared = goToShared;
