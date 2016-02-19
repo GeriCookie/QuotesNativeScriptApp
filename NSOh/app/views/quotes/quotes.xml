@@ -1,9 +1,9 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" xmlns:lv="nativescript-telerik-ui/listview" navigatedTo="onNavigatedTo">
     <page.actionBar>
-        <action-bar title="QuotesApp">
-            <action-bar.actionItems>
-                <action-item text="Home" tap="goToInitial" ios.position="right" />
-            </action-bar.actionItems>
+        <action-bar>
+           <ActionBar.titleView>
+                <Label text="QuotesApp" cssClass="custom-action-bar" id="title"/>
+            </ActionBar.titleView>
         </action-bar>
     </page.actionBar>
     <drawer:rad-side-drawer id="drawer" drawerLocation="Left">
@@ -11,7 +11,7 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <lv:RadListView items="{{ quotesList }}" swipeCells="true" itemSwipeProgressEnded="onSwipeEnded" itemTap="quotesListItemTap" id="quotesListView">
+            <lv:RadListView class="pageStack" items="{{ quotesList }}" swipeCells="true" itemSwipeProgressEnded="onSwipeEnded" itemTap="quotesListItemTap" id="quotesListView">
                 <lv:RadListView.listViewLayout>
                     <lv:ListViewLinearLayout scrollDirection="Vertical" />
                 </lv:RadListView.listViewLayout>
@@ -20,23 +20,23 @@
                         <Image src="{{authorImageUrl}}" stretch="none" row="0" col="0" rowSpan="2" class="listView-image" />
                         <Label text="{{quoteText}}" textWrap="true" row="0" col="1" class="listView-quoteText" />
                         <Label text="{{author}}" textWrap="true" row="1" col="1" class="listView-author" />
-                        <Label text='{{shared ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" />
+                        <Label text='{{shared ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" id="heart" />
                     </GridLayout>
                 </lv:RadListView.itemTemplate>
                 <lv:RadListView.itemSwipeTemplate>
-                    <GridLayout columns="1*, 8*">
-                        <Button col="0" style="background-color: green;" />
+                    <GridLayout columns="1*, 12*">
+                        <Button col="0" style="background-color: gray;" />
                     </GridLayout>
                 </lv:RadListView.itemSwipeTemplate>
             </lv:RadListView>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
-            <stackLayout rows="auto, *, auto" id="drawer-content">
-                <Button text="explore all quotes" tap="goToQuotesList" class="drowerBtn" />
-                <Button text="shared by others" tap="goToShared" class="drowerBtn" />
-                <Button text="my followings" tap="goToQuotesList" class="drowerBtn" />
-                <Button text="my quotes" tap="goToQuotesList" class="drowerBtn" />
-                <Button text="log in" tap="goToLogin" class="drowerBtn" />
+            <stackLayout id="drawer-content">
+                <Label text="Explore all quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="Shared by others" tap="goToShared" class="drowerBtn" />
+                <Label text="My followings" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="My quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="Log in" tap="goToLogin" class="drowerBtn" />
             </stackLayout>
         </drawer:rad-side-drawer.drawerContent>
     </drawer:rad-side-drawer>

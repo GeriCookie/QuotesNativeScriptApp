@@ -8,6 +8,7 @@ var quotesFakeVm;
 var page;
 var topmost;
 var quotesListView;
+var title;
 
 function onNavigatedTo(args) {
     page = args.object;
@@ -27,10 +28,11 @@ function onNavigatedTo(args) {
     page.bindingContext = quotesFakeVm;
 
     topmost = frameModule.topmost();
-}
 
-function pageLoaded(args) {
-    
+    title = view.getViewById(page, "title");
+    title.on("tap", function (args) {
+        topmost.navigate("views/initial/initial");
+    });
 }
 
 function goToLogin() {
@@ -45,10 +47,6 @@ function quotesListItemTap(args) {
     var itemIndex = args.itemIndex;
     quotesFakeVm.quotesList.getItem(itemIndex).shared = !(quotesFakeVm.quotesList.getItem(itemIndex).shared);
     quotesListView.refresh();
-}
-
-function goToInitial() {
-    topmost.navigate("views/initial/initial");
 }
 
 function onSwipeEnded(args) {
@@ -76,6 +74,5 @@ exports.onNavigatedTo = onNavigatedTo;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.quotesListItemTap = quotesListItemTap;
-exports.goToInitial = goToInitial;
 exports.onSwipeEnded = onSwipeEnded;
 exports.goToShared = goToShared;

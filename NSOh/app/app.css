@@ -6,10 +6,14 @@
 
 .drowerBtn {
 	horizontal-align: left;
-	background-color: transparent;
-	border-width: 0;
-	border-color: transparent;
-	margin: 0;
+	margin: 10;
+	font-family: Lobster;
+	font-size: 24;
+}
+
+.custom-action-bar {
+	font-family: GreatVibes-Regular;
+	font-size: 30;
 }
 
 .drowerContainer {
@@ -39,18 +43,23 @@
 	font-size: 14;
 }
 
-stackLayout {
-	margin: 10;
+.pageStack {
+	padding: 10;
+	background-image: url('~/images/backgroundWriting.png');
+	background-repeat: repeat;
+	background-size: 50% 50%;
 }
 
 .listView-quoteText {
-	font-size: 16;
+	font-size: 22;
 	horizontal-align: left;
+	font-family: GreatVibes-Regular;
 }
 
 .listView-author {
 	font-size: 12;
 	horizontal-align: right;
+	font-family: Lobster;
 }
 
 .listView-image {

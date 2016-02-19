@@ -5,6 +5,7 @@ var gestures = require("ui/gestures");
 var quotesData = require("../../shared/quotes-data");
 var quote;
 var page;
+var title;
 var topmost;
 var quoteTag;
 
@@ -23,6 +24,11 @@ function onNavigatedTo(args) {
         };
         topmost.navigate(navigationEntry);
     });
+
+    title = view.getViewById(page, "title");
+    title.on("tap", function (args) {
+        topmost.navigate("views/initial/initial");
+    });
 }
 
 function goToLogin() {
@@ -31,10 +37,6 @@ function goToLogin() {
 
 function goToQuotesList() {
     topmost.navigate("views/quotes/quotes");
-}
-
-function goToInitial() {
-    topmost.navigate("views/initial/initial");
 }
 
 function goToShared() {
@@ -49,6 +51,5 @@ function goToShared() {
 
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
-exports.goToInitial = goToInitial;
 exports.onNavigatedTo = onNavigatedTo;
 exports.goToShared = goToShared;

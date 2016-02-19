@@ -1,9 +1,11 @@
 var UserViewModel = require("../../view-models/user-view-model");
 var frameModule = require("ui/frame");
 var quotesData = require("../../shared/quotes-data");
+var view = require("ui/core/view");
 var user;
 var page;
 var topmost;
+var title;
 
 function pageLoaded(args) {
     page = args.object;
@@ -15,6 +17,11 @@ function pageLoaded(args) {
 
     page.bindingContext = user;
     topmost = frameModule.topmost();
+
+    title = view.getViewById(page, "title");
+    title.on("tap", function (args) {
+        topmost.navigate("views/initial/initial");
+    });
 }
 
 function goToRegister() {
@@ -37,10 +44,6 @@ function goToQuotesList() {
     topmost.navigate("views/quotes/quotes");
 }
 
-function goToInitial() {
-	topmost.navigate("views/initial/initial");
-}
-
 function goToShared() {
     var sharedQuotes = quotesData.shared();
     var navigationEntry = {
@@ -56,5 +59,4 @@ exports.goToRegister = goToRegister;
 exports.login = login;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
-exports.goToInitial = goToInitial;
 exports.goToShared = goToShared;

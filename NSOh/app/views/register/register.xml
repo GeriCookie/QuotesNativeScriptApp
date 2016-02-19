@@ -1,9 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" loaded="pageLoaded">
     <page.actionBar>
-        <action-bar title="QuotesApp">
-            <action-bar.actionItems>
-                <action-item text="Home" tap="goToInitial" ios.position="right" />
-            </action-bar.actionItems>
+        <action-bar>
+           <ActionBar.titleView>
+                <Label text="QuotesApp" cssClass="custom-action-bar" id="title"/>
+            </ActionBar.titleView>
         </action-bar>
     </page.actionBar>
     <drawer:rad-side-drawer id="drawer" drawerLocation="Left">
@@ -11,7 +11,7 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <StackLayout>
+            <StackLayout class="pageStack">
                 <Label text="register" textWrap="true" class="title" />
                 <TextField id="login" hint="Your email" text="{{ email }}" keyboardType="email" autocorrect="false" />
                 <TextField id="password" hint="Your password" text="{{ password }}" secure="true" />
@@ -20,12 +20,12 @@
             </StackLayout>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
-            <stackLayout rows="auto, *, auto" id="drawer-content">
-                <Button text="explore all quotes" tap="goToQuotesList" class="drowerBtn" />
-                <Button text="shared by others" tap="goToShared" class="drowerBtn" />
-                <Button text="my followings" tap="goToQuotesList" class="drowerBtn" />
-                <Button text="my quotes" tap="goToQuotesList" class="drowerBtn" />
-                <Button text="log in" tap="goToLogin" class="drowerBtn" />
+            <stackLayout id="drawer-content">
+                <Label text="Explore all quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="Shared by others" tap="goToShared" class="drowerBtn" />
+                <Label text="My followings" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="My quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="Log in" tap="goToLogin" class="drowerBtn" />
             </stackLayout>
         </drawer:rad-side-drawer.drawerContent>
     </drawer:rad-side-drawer>
