@@ -1,33 +1,57 @@
+'use strict'
+var config = require("../shared/config");
 var Observable = require("data/observable").Observable;
 
-function User(info) {
-    info = info || {};
 
-    var userViewModel = new Observable({
-        email: info.email || "",
-        password: info.password || "",
-        imageUrl: info.imageUrl || ""
-    });
+class UserViewModel extends Observable {
+    constructor() {
+        super();
+        console.log("******************");
+        console.log(this);
+        this.username = "";
+        this.password = "";
+        this.imageUrl = "";
+    }
 
-    userViewModel.login = function() {
-        // Implement here the login http logic
-        var promis = new Promise(
-            function(resolve, reject) {
-                resolve("Fake username");
+    login() {
+
+    }
+
+    register() {
+        console.log("In viewModel registration");
+        console.log(this.get("username"));
+        return fetch(config.apiUrl + "/api/users", {
+            method: "POST",
+            body: JSON.stringify({
+                username: this.get("username"),
+                passHash: this.get("password"),
+                imageUrl: this.get("imageUrl")
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(handleErrors)
+        .then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            config.token = data.token;
+            console.log("token" + config.token);
         });
-        return promis;
-    };
+    }
 
-    userViewModel.register = function() {
-        // Implement here the register http logic
-        var promis = new Promise(
-            function(resolve, reject) {
-                resolve("Fake username");
-        });
-        return promis;
-    };
-
-    return userViewModel;
 }
 
-module.exports = User;
+function handleErrors(response) {
+	if (!response.ok) {
+		console.log(JSON.stringify(response));
+		throw Error(response.statusText);
+	}
+	return response;
+}
+
+module.exports = {
+    create: function() {
+        return new UserViewModel();
+    }
+}

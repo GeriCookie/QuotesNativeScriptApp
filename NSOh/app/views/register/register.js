@@ -1,8 +1,9 @@
 var UserViewModel = require("../../view-models/user-view-model");
 var frameModule = require("ui/frame");
+var dialogsModule = require("ui/dialogs");
 var quotesData = require("../../shared/quotes-data");
 var view = require("ui/core/view");
-var user;
+var user = UserViewModel.create();
 var page;
 var topmost;
 var title;
@@ -10,13 +11,17 @@ var title;
 function pageLoaded(args) {
     page = args.object;
 
-    user = new UserViewModel({
-        email: "nativescriptrocks@telerik.com",
-        password: "password",
-        imageUrl: "fakeUrl"
-    });
-
     page.bindingContext = user;
+
+    user.set("username", "");
+    user.set("password", "");
+    //user.set("imageUrl", "")
+
+    username = page.getViewById("username");
+    password = page.getViewById("password");
+    //imageUrl = page.getViewById("imageUrl");
+    registerButton = page.getViewById("register-button");
+
 
     topmost = frameModule.topmost();
 
@@ -26,11 +31,26 @@ function pageLoaded(args) {
     });
 }
 
-function register() {
+function completeRegistration() {
     user.register()
-        .then(function(username) {
-            alert(username + " successfully registered!");
-        });
+        .then(function() {
+            console.log("IN Complete registration");
+            dialogsModule
+                .alert("Your account was successfully created.")
+                .then(function() {
+                    topmost.navigate("views/login/login");
+                }).catch(function() {
+                    dialogsModule.alert({
+                        message: "Unfortunately we were unable to create your account.",
+                        okButtonText: "OK"
+                    });
+                });
+        })
+}
+
+function register() {
+    console.log("IN REGISTER");
+    completeRegistration();
 }
 
 function goToLogin() {

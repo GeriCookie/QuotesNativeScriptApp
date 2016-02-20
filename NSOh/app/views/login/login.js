@@ -9,11 +9,11 @@ var title;
 
 function pageLoaded(args) {
     page = args.object;
-    user = new UserViewModel({
-		email: "nativescriptrocks@telerik.com",
-		password: "password",
-		imageUrl: "fakeUrl"
-	});
+  //   user = new UserViewModel({
+	// 	email: "nativescriptrocks@telerik.com",
+	// 	password: "password",
+	// 	imageUrl: "fakeUrl"
+	// });
 
     page.bindingContext = user;
     topmost = frameModule.topmost();

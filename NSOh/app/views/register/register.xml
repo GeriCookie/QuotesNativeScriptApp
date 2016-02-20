@@ -13,10 +13,9 @@
         <drawer:rad-side-drawer.mainContent>
             <StackLayout class="pageStack">
                 <Label text="register" textWrap="true" class="title" />
-                <TextField id="login" hint="Your email" text="{{ email }}" keyboardType="email" autocorrect="false" />
+                <TextField id="username" hint="Your username" text="{{ username }}" keyboardType="email" autocorrect="false" />
                 <TextField id="password" hint="Your password" text="{{ password }}" secure="true" />
-                <TextField id="image" hint="Your image URL" text="{{ imageUrl }}" />
-                <Button text="register with us" tap="register" />
+                <Button text="register with us" id="register-button" tap="register" />
             </StackLayout>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
