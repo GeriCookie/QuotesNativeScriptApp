@@ -3,6 +3,9 @@
 		"id": "org.nativescript.NSOh",
 		"tns-android": {
 			"version": "1.6.1"
+		},
+		"tns-ios": {
+			"version": "1.6.0"
 		}
 	},
 	"dependencies": {

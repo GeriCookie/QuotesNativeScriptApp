@@ -21,7 +21,7 @@ passport.use(new Strategy(
     });
   }
 ));
-var db = mongoose.connect('mongodb://localhost/quotes');
+var db = mongoose.connect('mongodb://nativescript:123456@ds027719.mongolab.com:27719/quotesapi');
 
 var User = require('./models/userModel');
 var Quote = require('./models/quoteModel');
