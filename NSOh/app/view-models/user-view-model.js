@@ -14,7 +14,26 @@ class UserViewModel extends Observable {
     }
 
     login() {
-
+        console.log('VM login');
+        return fetch(config.apiUrl + "/api/users/auth", {
+            method: "PUT",
+            body: JSON.stringify({
+                username: this.get("username"),
+                passHash: this.get("password")
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(handleErrors)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            config.token = data.token;
+            console.log("HEREEEEE")
+            console.log("token" + config.token);
+        });
     }
 
     register() {

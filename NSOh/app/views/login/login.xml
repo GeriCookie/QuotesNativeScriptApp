@@ -13,7 +13,7 @@
         <drawer:rad-side-drawer.mainContent>
             <StackLayout class="pageStack">
                 <Label text="log in" textWrap="true" class="title" />
-                <TextField id="login" hint="Your email" text="{{ email }}" keyboardType="email" autocorrect="false" />
+                <TextField id="login" hint="Your username" text="{{ username }}" keyboardType="email" autocorrect="false" />
                 <TextField id="password" hint="Your password" text="{{ password }}" secure="true" />
                 <Button text="log in" tap="login" />
                 <Button text="create new account" tap="goToRegister" />

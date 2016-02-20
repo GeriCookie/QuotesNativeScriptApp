@@ -2,18 +2,14 @@ var UserViewModel = require("../../view-models/user-view-model");
 var frameModule = require("ui/frame");
 var quotesData = require("../../shared/quotes-data");
 var view = require("ui/core/view");
-var user;
+var user = UserViewModel.create();
 var page;
 var topmost;
 var title;
 
 function pageLoaded(args) {
     page = args.object;
-  //   user = new UserViewModel({
-	// 	email: "nativescriptrocks@telerik.com",
-	// 	password: "password",
-	// 	imageUrl: "fakeUrl"
-	// });
+
 
     page.bindingContext = user;
     topmost = frameModule.topmost();
@@ -30,10 +26,12 @@ function goToRegister() {
 }
 
  function login() {
+  console.log('Login tapped');
  	user.login()
 		.then(function (username) {
-			alert(username + " successfully logged in!");
-		});
+			// alert(username + " successfully logged in!");
+      frameModule.topmost().navigate("views/quotes/quotes");
+    });
  }
 
 function goToLogin() {

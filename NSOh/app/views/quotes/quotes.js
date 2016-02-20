@@ -10,22 +10,29 @@ var topmost;
 var quotesListView;
 var title;
 
+function onPageLoaded() {
+    
+}
+
 function onNavigatedTo(args) {
+    console.log('----------------------1');
     page = args.object;
     quotesListView = view.getViewById(page, "quotesListView");
-    
+
     var list;
     if (page.navigationContext) {
         list = page.navigationContext;
     } else {
         list = quotesData.all;
     }
+    console.log('2');
 
     var quotesList = new ObservableArray(list);
     quotesFakeVm = new Observable({
         quotesList: quotesList
     });
     page.bindingContext = quotesFakeVm;
+    console.log('3');
 
     topmost = frameModule.topmost();
 
@@ -33,6 +40,8 @@ function onNavigatedTo(args) {
     title.on("tap", function (args) {
         topmost.navigate("views/initial/initial");
     });
+    console.log('4');
+
 }
 
 function goToLogin() {
