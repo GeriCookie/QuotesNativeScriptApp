@@ -4,84 +4,61 @@ var Observable = require("data/observable").Observable;
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
-var quotesData = require("../../shared/quotes-data");
-var vm;
-var page;
 var topmost;
 var quotesListView;
 var title;
 
 function onPageLoaded(args) {
-    var page = args.object;
-    //init vm
-    var vm = QuoteViewModel.create();
-    page.bindingContext = vm;
+  var page = args.object;
+  //init vm
+  var vm = QuoteViewModel.create();
+  page.bindingContext = vm;
+
+  title = view.getViewById(page, "title");
+  title.on("tap", function(args) {
+    frameModule.topmost().navigate("views/initial/initial");
+  });
 }
 
-// function onNavigatedTo(args) {
-//     console.log('----------------------1');
-//     page = args.object;
-//     quotesListView = view.getViewById(page, "quotesListView");
-//
-//     var list;
-//     if (page.navigationContext) {
-//         list = page.navigationContext;
-//     } else {
-//         list = quotesData.all;
-//     }
-//     console.log('2');
-//
-//     var quotesList = new ObservableArray(list);
-//     quotesFakeVm = new Observable({
-//         quotesList: quotesList
-//     });
-//     page.bindingContext = quotesFakeVm;
-//     console.log('3');
-//
-//     topmost = frameModule.topmost();
-//
-//     title = view.getViewById(page, "title");
-//     title.on("tap", function (args) {
-//         topmost.navigate("views/initial/initial");
-//     });
-//     console.log('4');
-// }
-
 function goToLogin() {
-    topmost.navigate("views/login/login");
+  frameModule.topmost().navigate("views/login/login");
 }
 
 function goToQuotesList() {
-    topmost.navigate("views/quotes/quotes");
+  frameModule.topmost().navigate("views/quotes/quotes");
 }
 
 function quotesListItemTap(args) {
-    var item = args.view.bindingContext;
-    console.dir(item);
-    var index = quotesFakeVm.quotesList.findIndex(i => i.quoteText === item.quoteText);
-    quotesFakeVm.quotesList.getItem(index).shared = !(quotesFakeVm.quotesList.getItem(index).shared);
-    quotesListView.refresh();
+  var item = args.view.bindingContext;
+  console.dir(item);
+  var index = quotesFakeVm.quotesList.findIndex(i => i.quoteText === item.quoteText);
+  quotesFakeVm.quotesList.getItem(index).shared = !(quotesFakeVm.quotesList.getItem(index).shared);
+  quotesListView.refresh();
 }
 
 function onSwipeEnded(args) {
-    var itemIndex = args.itemIndex;
-    var selectedItem = quotesFakeVm.quotesList.getItem(itemIndex);
-    var navigationEntry = {
-        moduleName: "views/quote-details/quote-details",
-        context: selectedItem,
-        animated: true
-    };
-    topmost.navigate(navigationEntry);
+  var sender = args.object;
+  var page = sender.page;
+  var vm = page.bindingContext;
+  var itemIndex = args.itemIndex;
+  var quote = vm.quotes.getItem(itemIndex);
+  var navigationEntry = {
+    moduleName: "views/quote-details/quote-details",
+    context: { id:quote._id },
+    animated: true
+  };
+  frameModule.topmost().navigate(navigationEntry);
+
 }
 
 function goToShared() {
-    var sharedQuotes = quotesData.shared();
-    var navigationEntry = {
-        moduleName: "views/quotes/quotes",
-        context: sharedQuotes,
-        animated: true
-    };
-    topmost.navigate(navigationEntry);
+  var sharedQuotes = quotesData.shared();
+  var navigationEntry = {
+    moduleName: "views/quotes/quotes",
+    context: sharedQuotes,
+    animated: true
+  };
+  frameModule.topmost().navigate(navigationEntry);
 }
 
 exports.onPageLoaded = onPageLoaded;

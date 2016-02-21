@@ -12,7 +12,7 @@
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
             <StackLayout class="pageStack">
-                <Label text="{{quoteText}}" textWrap="true" class="quote" />
+                <Label text="{{text}}" textWrap="true" class="quote quote-details" />
                 <Label text="{{author}}" textWrap="true" class="author" />
                 <StackLayout orientation="horizontal">
                     <Label col="0" text="tags: " textWrap="true" class="tagsLabel" />

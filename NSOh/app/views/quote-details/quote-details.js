@@ -1,4 +1,4 @@
-var QuoteViewModel = require("../../view-models/quote-view-model");
+var QuoteDetailsViewModel = require("../../view-models/quote-detail-view-model");
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var gestures = require("ui/gestures");
@@ -10,33 +10,33 @@ var topmost;
 var quoteTag;
 
 function onNavigatedTo(args) {
-    var page = args.object;
-    page.bindingContext = page.navigationContext;
-    topmost = frameModule.topmost();
-
-    quoteTag = view.getViewById(page, "tagsTags");
-    quoteTag.on(gestures.GestureTypes.tap, function(args) {
-        var quotesWithTheSameTag = quotesData.byTag(quoteTag.text);
-        var navigationEntry = {
-            moduleName: "views/quotes/quotes",
-            context: quotesWithTheSameTag,
-            animated: true
-        };
-        topmost.navigate(navigationEntry);
-    });
-
-    title = view.getViewById(page, "title");
-    title.on("tap", function (args) {
-        topmost.navigate("views/initial/initial");
-    });
+    var context = args.context;
+    var id = context.id;
+    var vm = QuoteDetailsViewModel.create(id);
+    args.object.bindingContext = vm;
+    // quoteTag = view.getViewById(page, "tagsTags");
+    // quoteTag.on(gestures.GestureTypes.tap, function(args) {
+    //     var quotesWithTheSameTag = quotesData.byTag(quoteTag.text);
+    //     var navigationEntry = {
+    //         moduleName: "views/quotes/quotes",
+    //         context: quotesWithTheSameTag,
+    //         animated: true
+    //     };
+    //     frameModule.topmost().navigate(navigationEntry);
+    // });
+    //
+    // title = view.getViewById(page, "title");
+    // title.on("tap", function (args) {
+    //     frameModule.topmost().navigate("views/initial/initial");
+    // });
 }
 
 function goToLogin() {
-    topmost.navigate("views/login/login");
+    frameModule.topmost().navigate("views/login/login");
 }
 
 function goToQuotesList() {
-    topmost.navigate("views/quotes/quotes");
+    frameModule.topmost().navigate("views/quotes/quotes");
 }
 
 function goToShared() {
@@ -46,7 +46,7 @@ function goToShared() {
         context: sharedQuotes,
         animated: true
     };
-    topmost.navigate(navigationEntry);
+    frameModule.topmost().navigate(navigationEntry);
 }
 
 exports.goToLogin = goToLogin;

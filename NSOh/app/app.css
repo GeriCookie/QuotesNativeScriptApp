@@ -32,6 +32,11 @@
 	font-family: GreatVibes-Regular;
 }
 
+.quote-details {
+  font-size: 25
+
+}
+
 .author {
 	font-size: 14;
 	horizontal-align: right;
