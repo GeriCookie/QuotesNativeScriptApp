@@ -2,6 +2,7 @@
 var config = require('../shared/config');
 var Observable = require("data/observable").Observable;
 var ObservableArray = require('data/observable-array').ObservableArray;
+var fetchModule = require('fetch');
 
 class Quote extends Observable {
     constructor(){
@@ -17,16 +18,21 @@ class Quote extends Observable {
         this.currentPage+=1;
         var url = `${config.apiUrl}/api/quotes?page=${this.currentPage}`;
         let that = this;
-        return fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
+        console.log(url);
+        return fetchModule.fetch(url, {
+            method: "GET"
         })
         .then(handleErrors)
         .then(function(response) {
-            return response.json().result;
-        }).then(function(newQuotes) {
+            console.dir(response);
+            return response.json();
+        })
+        .then(function(json) {
+            console.log(json);
+            return json.result;
+        })
+        .then(function(newQuotes) {
+            console.log(newQuotes);
             newQuotes.forEach(q=>that.quotes.push(q));
         });
     }
