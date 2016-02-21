@@ -70,12 +70,15 @@ var quoteController = function(User, Quote, Update) {
           });
         }
         //not working
-        if (req.params.author) {
-          var author = req.params.author.toLowerCase();
+        if (req.query.author) {
+          var author = req.query.author.toLowerCase();
+          console.log(author);
           quotes = quotes.filter(function(quote) {
-            return quote.author.toLowerCase() === author;
+            return quote.author.toLowerCase().indexOf(author) >= 0;
           });
         }
+        //Elin%20Pelin
+        //Elin+Pelin
 
         quotes = quotes.slice((page - 1) * size, page * size)
           .map(quote => {

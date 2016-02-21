@@ -12,7 +12,7 @@ var routes = function(User, Quote) {
 
   var myQuotesController = require('../Controllers/myQuotesController')(User, Quote);
 
-  quoteRouter.get('/',auth(), quoteController.get);
+  myQuotesRouter.get('/',auth(), myQuotesController.get);
 
   return myQuotesRouter;
 };
