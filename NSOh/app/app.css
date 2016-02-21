@@ -27,7 +27,7 @@
 }
 
 .quote {
-	margin-top: 50;
+	margin-top: 20;
 	font-size: 40;
 	font-family: GreatVibes-Regular;
 }
@@ -46,6 +46,11 @@
 .tagsLabel, .tagsTags {
 	font-family: Lobster;
 	font-size: 14;
+	margin: 10;
+}
+
+.tagsTags {
+	
 }
 
 .pageStack {
@@ -61,15 +66,26 @@
 	font-family: GreatVibes-Regular;
 }
 
-.listView-author {
+.listView-author,
+.listView-user {
 	font-size: 12;
-	horizontal-align: right;
 	font-family: Lobster;
 }
 
+.listView-updateText {
+	font-size: 16;
+	font-family: Lobster;
+}
+
+.listView-author {
+	horizontal-align: right;
+}
+
 .listView-image {
-	vertical-align: center;
-	horizontal-align: center;
+	vertical-align: top;
+	border-radius: 10;
+	height: 50;
+	width: 50;
 }
 
 .listView-icon {
@@ -79,7 +95,25 @@
 	horizontal-align: center;
 }
 
+.initialView-icon {
+	font-family: fontawesome-webfont;
+	font-size: 25;
+	vertical-align: center;
+	horizontal-align: left;
+}
+
 .quote-grid-cell {
 	padding-top: 10;
 	padding-bottom: 5;
+}
+
+.updateBtn {
+	font-family: Lobster;
+	horizontal-align: center;
+	border-color: gray;
+	border-width: 1;
+	font-size: 16;
+	padding: 5 10 5 10;
+	margin-top: 10;
+	margin-bottom: 30;
 }

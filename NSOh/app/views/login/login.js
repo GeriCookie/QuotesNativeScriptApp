@@ -42,13 +42,7 @@ function goToQuotesList() {
 }
 
 function goToShared() {
-    var sharedQuotes = quotesData.shared();
-    var navigationEntry = {
-        moduleName: "views/quotes/quotes",
-        context: sharedQuotes,
-        animated: true
-    };
-    topmost.navigate(navigationEntry);
+    frameModule.topmost().navigate("views/updates/updates");
 }
 
 exports.pageLoaded = pageLoaded;

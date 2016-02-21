@@ -1,6 +1,10 @@
+var Observable = require("data/observable").Observable;
+
 var QuoteOfTheDayViewModel = require("../../view-models/initial-view-model");
 var frameModule = require("ui/frame");
 var quotesData = require("../../shared/quotes-data");
+var config = require("../../shared/config");
+var view = require("ui/core/view");
 var quote;
 var page;
 var topmost;
@@ -21,16 +25,19 @@ function goToQuotesList() {
 }
 
 function goToShared() {
-    var sharedQuotes = quotesData.shared();
-    var navigationEntry = {
-        moduleName: "views/quotes/quotes",
-        context: sharedQuotes,
-        animated: true
-    };
-    frameModule.topmost().navigate(navigationEntry);
+    frameModule.topmost().navigate("views/updates/updates");
+}
+
+function shareUnshareTap(args) {
+  if (config.token) {
+    quote.markFavorite();
+  } else {
+    frameModule.topmost().navigate("views/login/login");
+  }
 }
 
 exports.pageLoaded = pageLoaded;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.goToShared = goToShared;
+exports.shareUnshareTap = shareUnshareTap;

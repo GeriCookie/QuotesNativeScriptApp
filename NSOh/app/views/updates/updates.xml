@@ -11,16 +11,22 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <lv:RadListView class="pageStack" items="{{ quotes }}" loadOnDemandMode="Auto" loadMoreDataRequested="loadMoreQuotes" swipeCells="true" itemSwipeProgressEnded="onSwipeEnded"  id="quotesListView">
+            <lv:RadListView class="pageStack" items="{{ updates }}" loadMoreDataRequested="loadMoreUpdates" id="updatesListView">
                 <lv:RadListView.listViewLayout>
                     <lv:ListViewLinearLayout scrollDirection="Vertical" />
                 </lv:RadListView.listViewLayout>
                 <lv:RadListView.itemTemplate>
-                    <GridLayout rows="2*, *" columns="2*, 7*, 1*" class="quote-grid-cell">
-                        <Image src="{{imageUrl}}" stretch="aspectFill" row="0" col="0" rowSpan="2" class="listView-image" />
-                        <Label text="{{text}}" textWrap="true" row="0" col="1" class="listView-quoteText" />
-                        <Label text="{{author}}" textWrap="true" row="1" col="1" class="listView-author" />
-                        <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" id="heart" tap="quotesListItemTap"/>
+                    <GridLayout rows="auto, auto, auto, auto, auto" columns="2*, 7*" class="quote-grid-cell">
+                        <Image src="{{userImageUrl}}" stretch="aspectFill" row="0" col="0" rowSpan="2" class="listView-image" />
+                        <Label text="{{userUsername}}" textWrap="true" row="0" col="1" class="listView-user" />
+                        <Label text="{{text}}" textWrap="true" row="1" col="1" class="listView-updateText" />
+                        <Label text="{{quoteText}}" textWrap="true" row="2" col="0" colSpan="2" class="listView-quoteText" />
+                        <Label text="{{quoteAuthor}}" textWrap="true" row="3" col="1" class="listView-author" />
+                        <GridLayout rows="auto" columns="*,*,*" row="4" col="0" colSpan="2">
+                            <Label text="follow" tap="followUser" row="0" col="0" class="updateBtn"/>
+                            <Label text="like" tap="likeUpdate" row="0" col="1" class="updateBtn"/>
+                            <Label text="comment" tap="commentUpdate" row="0" col="2" class="updateBtn"/>
+                        </GridLayout>
                     </GridLayout>
                 </lv:RadListView.itemTemplate>
                 <lv:RadListView.itemSwipeTemplate>

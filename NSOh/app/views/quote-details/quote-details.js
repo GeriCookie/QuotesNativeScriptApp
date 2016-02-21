@@ -8,12 +8,13 @@ var page;
 var title;
 var topmost;
 var quoteTag;
+var vm;
 
 function onNavigatedTo(args) {
     var context = args.context;
     var id = context.id;
-    var vm = QuoteDetailsViewModel.create(id);
-    var page = args.object;
+    vm = QuoteDetailsViewModel.create(id);
+    page = args.object;
     page.bindingContext = vm;
 }
 
@@ -26,10 +27,29 @@ function goToQuotesList() {
 }
 
 function goToShared() {
-    var sharedQuotes = quotesData.shared();
+    frameModule.topmost().navigate("views/updates/updates");
+}
+
+function getQuotesByAuthor() {
+    // Implement get all quotes by the current author (author name available in vm.author)
+    var allQuotesByAuthor;
+
     var navigationEntry = {
         moduleName: "views/quotes/quotes",
-        context: sharedQuotes,
+        context: allQuotesByAuthor,
+        animated: true
+    };
+    frameModule.topmost().navigate(navigationEntry);
+}
+
+function getQuotesByTag(args) {
+    var tag = args.object.text;
+    // Implement get all quotes by the given tag
+    var allQuotesByTag;
+
+    var navigationEntry = {
+        moduleName: "views/quotes/quotes",
+        context: allQuotesByTag,
         animated: true
     };
     frameModule.topmost().navigate(navigationEntry);
@@ -39,3 +59,5 @@ exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.onNavigatedTo = onNavigatedTo;
 exports.goToShared = goToShared;
+exports.getQuotesByAuthor = getQuotesByAuthor;
+exports.getQuotesByTag = getQuotesByTag;

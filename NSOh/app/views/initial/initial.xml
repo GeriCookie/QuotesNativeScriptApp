@@ -2,7 +2,7 @@
     <page.actionBar>
         <action-bar>
             <ActionBar.titleView>
-                <Label text="QuotesApp" cssClass="custom-action-bar" id="title"/>
+                <Label text="QuotesApp" cssClass="custom-action-bar" id="title" />
             </ActionBar.titleView>
         </action-bar>
     </page.actionBar>
@@ -11,10 +11,13 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <StackLayout class="pageStack">
-                <Label text="{{text}}" textWrap="true" class="quote" />
-                <Label text="{{author}}" textWrap="true" class="author" />
-            </StackLayout>
+            <ScrollView>
+                <StackLayout class="pageStack">
+                    <Label text="{{text}}" textWrap="true" class="quote" />
+                    <Label text="{{author}}" textWrap="true" class="author" />
+                    <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' class="initialView-icon" id="heart" tap="shareUnshareTap"/>
+                </StackLayout>
+            </ScrollView>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
             <stackLayout id="drawer-content">

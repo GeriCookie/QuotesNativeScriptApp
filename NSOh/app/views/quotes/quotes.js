@@ -8,13 +8,14 @@ var config = require("../../shared/config");
 var topmost;
 var quotesListView;
 var title;
+var vm;
+
 
 function onPageLoaded(args) {
   var page = args.object;
   //init vm
-  var vm = QuoteViewModel.create();
+  vm = QuoteViewModel.create();
   page.bindingContext = vm;
-
   title = view.getViewById(page, "title");
   title.on("tap", function(args) {
     frameModule.topmost().navigate("views/initial/initial");
@@ -32,12 +33,12 @@ function goToQuotesList() {
 function quotesListItemTap(args) {
   var sender = args.object;
   var page = sender.page;
-  var vm = page.bindingContext;
   var quote = sender.bindingContext;
   // var itemIndex = args.itemIndex;
   // var quote = vm.quotes.getItem(itemIndex);
   if (config.token) {
     vm.markFavorite(quote._id);
+    quote.inFavorites = !quote.inFavorites;
     var quotesListView = view.getViewById(page, "quotesListView");
     quotesListView.refresh();
   } else {
@@ -63,13 +64,15 @@ function onSwipeEnded(args) {
 }
 
 function goToShared() {
-  var sharedQuotes = quotesData.shared();
-  var navigationEntry = {
-    moduleName: "views/quotes/quotes",
-    context: sharedQuotes,
-    animated: true
-  };
-  frameModule.topmost().navigate(navigationEntry);
+    frameModule.topmost().navigate("views/updates/updates");
+}
+
+function loadMoreQuotes(args) {
+  vm.loadQuotes();
+  var page = args.object.page;
+  var quotesListView = view.getViewById(page, "quotesListView");
+  quotesListView.notifyLoadOnDemandFinished();
+  args.returnValue = true;
 }
 
 exports.onPageLoaded = onPageLoaded;
@@ -78,3 +81,4 @@ exports.goToQuotesList = goToQuotesList;
 exports.quotesListItemTap = quotesListItemTap;
 exports.onSwipeEnded = onSwipeEnded;
 exports.goToShared = goToShared;
+exports.loadMoreQuotes = loadMoreQuotes;

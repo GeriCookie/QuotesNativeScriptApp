@@ -1,8 +1,8 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" navigatedTo="onNavigatedTo">
     <page.actionBar>
         <action-bar>
-           <ActionBar.titleView>
-                <Label text="QuotesApp" cssClass="custom-action-bar" id="title"/>
+            <ActionBar.titleView>
+                <Label text="QuotesApp" cssClass="custom-action-bar" id="title" />
             </ActionBar.titleView>
         </action-bar>
     </page.actionBar>
@@ -11,14 +11,21 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <StackLayout class="pageStack">
-                <Label text="{{text}}" textWrap="true" class="quote quote-details" />
-                <Label text="{{author}}" textWrap="true" class="author" />
-                <StackLayout orientation="horizontal">
+            <ScrollView>
+                <StackLayout class="pageStack">
+                    <Label text="{{text}}" textWrap="true" class="quote quote-details" />
+                    <Label text="{{author}}" textWrap="true" class="author" tap="getQuotesByAuthor" />
                     <Label col="0" text="tags: " textWrap="true" class="tagsLabel" />
-                    <Label col="1" text="{{ tags }}" textWrap="true" class="tagsTags" id="tagsTags"/>
+                    <Repeater col="1" items="{{ tags }}" id="tagsTags">
+                        <Repeater.itemsLayout>
+                            <WrapLayout />
+                        </Repeater.itemsLayout>
+                        <Repeater.itemTemplate>
+                            <Label text="{{ &value }}" textWrap="true" class="tagsTags" tap="getQuotesByTag" />
+                        </Repeater.itemTemplate>
+                    </Repeater>
                 </StackLayout>
-            </StackLayout>
+            </ScrollView>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
             <stackLayout id="drawer-content">

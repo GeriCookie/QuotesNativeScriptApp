@@ -31,6 +31,7 @@ class QuoteOfTheDay extends Observable {
             return json.result;
         })
         .then(function(quoteOfTheDay) {
+            that.set("_id", quoteOfTheDay._id);
             that.set("text", quoteOfTheDay.text);
             that.set("author", quoteOfTheDay.author);
             that.set("imageUrl", quoteOfTheDay.imageUrl);
@@ -38,6 +39,10 @@ class QuoteOfTheDay extends Observable {
             that.set("favoritesCount", quoteOfTheDay.favoritesCount);
         });
     }
+
+  markFavorite() {
+    // Implement here the logic for sharing unshearing this quote
+  }
 }
 
 function handleErrors(response) {
