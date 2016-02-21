@@ -190,12 +190,15 @@ var quoteController = function(User, Quote, Update) {
   };
 
   var random = function(req, res) {
-    var random = (Math.random()*1919) | 0;
-    Quote.find().limit(-1).skip(random).exec(function(err, res) {
+    var randomNumber = (Math.random()*1919) | 0;
+    console.log(randomNumber);
+    Quote.find().limit(1).skip(randomNumber).exec(function(err, quotes) {
       if (err) {
         return res.status(500)
           .send(err);
       }
+
+      var quote = quotes[0];
       if (!quote) {
         return res.status(404)
           .send({
@@ -215,7 +218,6 @@ var quoteController = function(User, Quote, Update) {
         result: quoteDetails
       });
     });
-    })
   }
 
   return {
