@@ -1,3 +1,4 @@
+'use strict'
 require('../polyfills/array');
 var quoteController = function(User, Quote, Update) {
   var post = function(req, res) {
@@ -28,7 +29,7 @@ var quoteController = function(User, Quote, Update) {
             userId: user._id
           },
           quote: {
-            text: quote.text,
+            text: `${quote.text.substring(0,100)}...` ,
             author: quote.author,
             imageUrl: quote.imageUrl, //must have dedault!!!!
             tags: quote.tags
@@ -76,7 +77,7 @@ var quoteController = function(User, Quote, Update) {
           .map(quote => {
             return {
               _id: quote._id,
-              text: quote.text,
+              text: `${quote.text.substring(0,100)}...`,
               author: quote.author,
               imageUrl: quote.imageUrl,
               tags: quote.tags,
