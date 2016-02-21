@@ -219,7 +219,8 @@ var quoteController = function(User, Quote, Update) {
             _id: quote._id,
             author: quote.author,
             imageUrl: quote.imageUrl,
-            favoritesCount: quote.favoritesCount
+            favoritesCount: quote.favoritesCount,
+            dateAdded: new Date()
           });
         }
 
