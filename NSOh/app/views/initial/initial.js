@@ -1,4 +1,4 @@
-var QuoteViewModel = require("../../view-models/quote-view-model");
+var QuoteOfTheDayViewModel = require("../../view-models/initial-view-model");
 var frameModule = require("ui/frame");
 var quotesData = require("../../shared/quotes-data");
 var quote;
@@ -8,24 +8,22 @@ var topmost;
 
 function pageLoaded(args) {
     page = args.object;
-
+    quote = QuoteOfTheDayViewModel.create();
     // quote = new QuoteViewModel({
 	// 	quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
 	// 	author: " Martin Luther King Jr."
-	// }); 
+	// });
 
 
     page.bindingContext = quote;
-
-    topmost = frameModule.topmost();
 }
 
 function goToLogin() {
-    topmost.navigate("views/login/login");
+    frameModule.topmost().navigate("views/login/login");
 }
 
 function goToQuotesList() {
-    topmost.navigate("views/quotes/quotes");
+    frameModule.topmost().navigate("views/quotes/quotes");
 }
 
 function goToShared() {
@@ -35,7 +33,7 @@ function goToShared() {
         context: sharedQuotes,
         animated: true
     };
-    topmost.navigate(navigationEntry);
+    frameModule.topmost().navigate(navigationEntry);
 }
 
 exports.pageLoaded = pageLoaded;

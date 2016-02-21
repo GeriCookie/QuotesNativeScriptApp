@@ -13,7 +13,8 @@ function onNavigatedTo(args) {
     var context = args.context;
     var id = context.id;
     var vm = QuoteDetailsViewModel.create(id);
-    args.object.bindingContext = vm;
+    var page = args.object;
+    page.bindingContext = vm;
     // quoteTag = view.getViewById(page, "tagsTags");
     // quoteTag.on(gestures.GestureTypes.tap, function(args) {
     //     var quotesWithTheSameTag = quotesData.byTag(quoteTag.text);
