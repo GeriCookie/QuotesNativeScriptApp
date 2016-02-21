@@ -4,6 +4,7 @@ var Observable = require("data/observable").Observable;
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
+var config = require("../../shared/config");
 var topmost;
 var quotesListView;
 var title;
@@ -32,15 +33,16 @@ function quotesListItemTap(args) {
   var sender = args.object;
   var page = sender.page;
   var vm = page.bindingContext;
-  var itemIndex = args.itemIndex;
-  var quote = vm.quotes.getItem(itemIndex);
-  vm.markFavorite(quote._id)
-    .catch(function(err){
-      frameModule.topmost().navigate("views/login/login");
-    }).then(function() {
-      quotesListView.refresh();
-    });
-
+  var quote = sender.bindingContext;
+  // var itemIndex = args.itemIndex;
+  // var quote = vm.quotes.getItem(itemIndex);
+  if (config.token) {
+    vm.markFavorite(quote._id);
+    var quotesListView = view.getViewById(page, "quotesListView");
+    quotesListView.refresh();
+  } else {
+    frameModule.topmost().navigate("views/login/login");
+  }
 }
 
 function onSwipeEnded(args) {
@@ -51,7 +53,9 @@ function onSwipeEnded(args) {
   var quote = vm.quotes.getItem(itemIndex);
   var navigationEntry = {
     moduleName: "views/quote-details/quote-details",
-    context: { id:quote._id },
+    context: {
+      id: quote._id
+    },
     animated: true
   };
   frameModule.topmost().navigate(navigationEntry);

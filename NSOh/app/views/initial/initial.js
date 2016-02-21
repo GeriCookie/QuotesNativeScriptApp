@@ -9,12 +9,6 @@ var topmost;
 function pageLoaded(args) {
     page = args.object;
     quote = QuoteOfTheDayViewModel.create();
-    // quote = new QuoteViewModel({
-	// 	quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-	// 	author: " Martin Luther King Jr."
-	// });
-
-
     page.bindingContext = quote;
 }
 

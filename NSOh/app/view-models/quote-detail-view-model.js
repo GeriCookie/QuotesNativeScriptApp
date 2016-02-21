@@ -20,22 +20,17 @@ class QuoteDetails extends Observable {
     loadQuoteDetails() {
         var url = `${config.apiUrl}/api/quotes/${this.id}`;
         let that = this;
-        console.log(url);
         return fetchModule.fetch(url, {
             method: "GET"
         })
         .then(handleErrors)
         .then(function(response) {
-            console.dir(response);
             return response.json();
         })
         .then(function(json) {
-            console.log(json);
             return json.result;
         })
         .then(function(quoteDetails) {
-            console.log('----------------');
-            console.dir(quoteDetails);
             that.set("text", quoteDetails.text);
             that.set("author", quoteDetails.author);
             that.set("imageUrl", quoteDetails.imageUrl);

@@ -15,21 +15,6 @@ function onNavigatedTo(args) {
     var vm = QuoteDetailsViewModel.create(id);
     var page = args.object;
     page.bindingContext = vm;
-    // quoteTag = view.getViewById(page, "tagsTags");
-    // quoteTag.on(gestures.GestureTypes.tap, function(args) {
-    //     var quotesWithTheSameTag = quotesData.byTag(quoteTag.text);
-    //     var navigationEntry = {
-    //         moduleName: "views/quotes/quotes",
-    //         context: quotesWithTheSameTag,
-    //         animated: true
-    //     };
-    //     frameModule.topmost().navigate(navigationEntry);
-    // });
-    //
-    // title = view.getViewById(page, "title");
-    // title.on("tap", function (args) {
-    //     frameModule.topmost().navigate("views/initial/initial");
-    // });
 }
 
 function goToLogin() {

@@ -26,7 +26,6 @@ function goToRegister() {
 }
 
  function login() {
-  console.log('Login tapped');
  	user.login()
 		.then(function (username) {
 			// alert(username + " successfully logged in!");

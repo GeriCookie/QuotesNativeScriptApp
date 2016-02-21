@@ -28,14 +28,10 @@ class UserViewModel extends Observable {
         })
         .then(function(data) {
             config.token = data.token;
-            console.log("HEREEEEE")
-            console.log("token" + config.token);
         });
     }
 
     register() {
-        console.log("In viewModel registration");
-        console.log(this.get("username"));
         return fetch(config.apiUrl + "/api/users", {
             method: "POST",
             body: JSON.stringify({
@@ -52,7 +48,6 @@ class UserViewModel extends Observable {
             return response.json();
         }).then(function(data) {
             config.token = data.token;
-            console.log("token" + config.token);
         });
     }
 

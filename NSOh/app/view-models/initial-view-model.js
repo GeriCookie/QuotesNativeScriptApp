@@ -7,7 +7,7 @@ var fetchModule = require('fetch');
 class QuoteOfTheDay extends Observable {
     constructor(){
         super();
-        
+
         this.text = "";
         this.author = "";
         this.imageUrl = "";
@@ -25,16 +25,12 @@ class QuoteOfTheDay extends Observable {
         })
         .then(handleErrors)
         .then(function(response) {
-            console.dir(response);
             return response.json();
         })
         .then(function(json) {
-            console.log(json);
             return json.result;
         })
         .then(function(quoteOfTheDay) {
-            console.log('----------------');
-            console.dir(quoteOfTheDay);
             that.set("text", quoteOfTheDay.text);
             that.set("author", quoteOfTheDay.author);
             that.set("imageUrl", quoteOfTheDay.imageUrl);
