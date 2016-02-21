@@ -1,48 +1,51 @@
+'use strict'
 var QuoteViewModel = require("../../view-models/quote-view-model");
 var Observable = require("data/observable").Observable;
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var quotesData = require("../../shared/quotes-data");
-var quotesFakeVm;
+var vm;
 var page;
 var topmost;
 var quotesListView;
 var title;
 
-function onPageLoaded() {
-    
+function onPageLoaded(args) {
+    var page = args.object;
+    //init vm
+    var vm = QuoteViewModel.create();
+    page.bindingContext = vm;
 }
 
-function onNavigatedTo(args) {
-    console.log('----------------------1');
-    page = args.object;
-    quotesListView = view.getViewById(page, "quotesListView");
-
-    var list;
-    if (page.navigationContext) {
-        list = page.navigationContext;
-    } else {
-        list = quotesData.all;
-    }
-    console.log('2');
-
-    var quotesList = new ObservableArray(list);
-    quotesFakeVm = new Observable({
-        quotesList: quotesList
-    });
-    page.bindingContext = quotesFakeVm;
-    console.log('3');
-
-    topmost = frameModule.topmost();
-
-    title = view.getViewById(page, "title");
-    title.on("tap", function (args) {
-        topmost.navigate("views/initial/initial");
-    });
-    console.log('4');
-
-}
+// function onNavigatedTo(args) {
+//     console.log('----------------------1');
+//     page = args.object;
+//     quotesListView = view.getViewById(page, "quotesListView");
+//
+//     var list;
+//     if (page.navigationContext) {
+//         list = page.navigationContext;
+//     } else {
+//         list = quotesData.all;
+//     }
+//     console.log('2');
+//
+//     var quotesList = new ObservableArray(list);
+//     quotesFakeVm = new Observable({
+//         quotesList: quotesList
+//     });
+//     page.bindingContext = quotesFakeVm;
+//     console.log('3');
+//
+//     topmost = frameModule.topmost();
+//
+//     title = view.getViewById(page, "title");
+//     title.on("tap", function (args) {
+//         topmost.navigate("views/initial/initial");
+//     });
+//     console.log('4');
+// }
 
 function goToLogin() {
     topmost.navigate("views/login/login");
@@ -53,8 +56,10 @@ function goToQuotesList() {
 }
 
 function quotesListItemTap(args) {
-    var itemIndex = args.itemIndex;
-    quotesFakeVm.quotesList.getItem(itemIndex).shared = !(quotesFakeVm.quotesList.getItem(itemIndex).shared);
+    var item = args.view.bindingContext;
+    console.dir(item);
+    var index = quotesFakeVm.quotesList.findIndex(i => i.quoteText === item.quoteText);
+    quotesFakeVm.quotesList.getItem(index).shared = !(quotesFakeVm.quotesList.getItem(index).shared);
     quotesListView.refresh();
 }
 
@@ -79,7 +84,7 @@ function goToShared() {
     topmost.navigate(navigationEntry);
 }
 
-exports.onNavigatedTo = onNavigatedTo;
+exports.onPageLoaded = onPageLoaded;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.quotesListItemTap = quotesListItemTap;

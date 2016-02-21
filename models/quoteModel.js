@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var quoteModel = new Schema({
   text: String,
   author: String,
-  authorImageUrl: String,
+  imageUrl: String,
   tags: [String],
   favoritesCount: Number
 });

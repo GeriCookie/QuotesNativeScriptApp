@@ -78,7 +78,7 @@ var quoteController = function(User, Quote, Update) {
               _id: quote._id,
               text: quote.text,
               author: quote.author,
-              authorImageUrl: quote.authorImageUrl,
+              imageUrl: quote.authorImageUrl,
               tags: quote.tags,
               favoritesCount: quote.favoritesCount
             };
@@ -108,7 +108,7 @@ var quoteController = function(User, Quote, Update) {
           text: quote.text,
           author: quote.author,
           tags: quote.tags,
-          authorImageUrl: quote.authorImageUrl,
+          imageUrl: quote.authorImageUrl,
           favoritesCount: quote.favoritesCount
         };
         res.send({
