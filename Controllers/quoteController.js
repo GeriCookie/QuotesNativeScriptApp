@@ -20,6 +20,10 @@ var quoteController = function(User, Quote, Update) {
         if (err) {
           throw err;
         }
+        var text = quote.text;
+        if (text.length > 100) {
+          text = `${quote.text.substring(0,100)}...`;
+        }
         var newUpdate = new Update({
           text: user.username + ' added new quote.',
           date: new Date(),
@@ -29,7 +33,7 @@ var quoteController = function(User, Quote, Update) {
             userId: user._id
           },
           quote: {
-            text: `${quote.text.substring(0,100)}...` ,
+            text:  text,
             author: quote.author,
             imageUrl: quote.imageUrl, //must have dedault!!!!
             tags: quote.tags
@@ -75,9 +79,13 @@ var quoteController = function(User, Quote, Update) {
 
         quotes = quotes.slice((page - 1) * size, page * size)
           .map(quote => {
+            var text = quote.text;
+            if (text.length > 100) {
+              text = `${quote.text.substring(0,100)}...`;
+            }
             return {
               _id: quote._id,
-              text: `${quote.text.substring(0,100)}...`,
+              text: text,
               author: quote.author,
               imageUrl: quote.imageUrl,
               tags: quote.tags,
