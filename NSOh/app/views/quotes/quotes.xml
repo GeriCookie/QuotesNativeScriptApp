@@ -20,7 +20,7 @@
                         <Image src="{{imageUrl}}" stretch="none" row="0" col="0" rowSpan="2" class="listView-image" />
                         <Label text="{{text}}" textWrap="true" row="0" col="1" class="listView-quoteText" />
                         <Label text="{{author}}" textWrap="true" row="1" col="1" class="listView-author" />
-                        <Label text='{{shared ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" id="heart" tap="quotesListItemTap"/>
+                        <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" id="heart" tap="quotesListItemTap"/>
                     </GridLayout>
                 </lv:RadListView.itemTemplate>
                 <lv:RadListView.itemSwipeTemplate>
