@@ -14,6 +14,7 @@ var routes = function(User, Quote, Update) {
 
   quoteRouter.get('/', quoteController.get)
     .post('/', auth(), quoteController.post)
+    .get('/auth', auth(), quoteController.getAuth)
     .get('/random', quoteController.random)
     .get('/:id', quoteController.getById)
     .put('/:id', auth(), quoteController.addToFavorites);

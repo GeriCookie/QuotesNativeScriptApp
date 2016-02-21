@@ -98,6 +98,60 @@ var quoteController = function(User, Quote, Update) {
       });
   };
 
+  var getAuth = function(req, res) {
+    var user = req.user;
+    var page = +req.query.page;
+    var size = +req.query.size;
+    if (!size) {
+      size = 10;
+    }
+    if (!page) {
+      page = 1;
+    }
+    Quote.find()
+      .exec(function(err, quotes) {
+        if (err) {
+          return res.status(500)
+            .send(err);
+        }
+        if (req.query.tag) {
+          var tag = req.query.tag.toLowerCase();
+          quotes = quotes.filter(function(quote) {
+            return !!(quote.tags.find(function(quoteTag) {
+              return quoteTag.toLowerCase() === tag;
+            }));
+          });
+        }
+        //not working
+        if (req.params.author) {
+          var author = req.params.author.toLowerCase();
+          quotes = quotes.filter(function(quote) {
+            return quote.author.toLowerCase() === author;
+          });
+        }
+
+        quotes = quotes.slice((page - 1) * size, page * size)
+          .map(quote => {
+            var text = quote.text;
+            if (text.length > 100) {
+              text = `${quote.text.substring(0,100)}...`;
+            }
+            return {
+              _id: quote._id,
+              text: text,
+              author: quote.author,
+              imageUrl: quote.imageUrl,
+              tags: quote.tags,
+              favoritesCount: quote.favoritesCount,
+              inFavorites: !!(user.favoriteQuotes.find(q => q._id.toString() === quote._id.toString()))
+            };
+          });
+        res.json({
+          result: quotes
+        });
+      });
+  };
+
   var getById = function(req, res) {
     Quote.findById(req.params.id)
       .exec(function(err, quote) {
@@ -232,6 +286,7 @@ var quoteController = function(User, Quote, Update) {
   return {
     post: post,
     get: get,
+    getAuth: getAuth,
     getById: getById,
     addToFavorites: addToFavorites,
     random: random
