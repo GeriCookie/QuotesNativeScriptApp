@@ -33,7 +33,7 @@ var quoteController = function(User, Quote, Update) {
             userId: user._id
           },
           quote: {
-            text:  text,
+            text: text,
             author: quote.author,
             imageUrl: quote.imageUrl, //must have dedault!!!!
             tags: quote.tags
@@ -145,24 +145,32 @@ var quoteController = function(User, Quote, Update) {
           quote.favoritesCount = 0;
         }
         //bug, the counter will erase to the end of the world...
-        quote.favoritesCount++;
 
-        quote.save(function() {
-          if (!user.favoriteQuotes) {
-            user.favoriteQuotes = [];
-          }
-          var index = user.favoriteQuotes.findIndex(favQoute => favQoute._id.toString() === quote._id.toString());
-          if (index < 0) {
+        // quote.save(function() {
+        if (!user.favoriteQuotes) {
+          user.favoriteQuotes = [];
+        }
+        var index = user.favoriteQuotes.findIndex(favQoute => favQoute._id.toString() === quote._id.toString());
+        var isAdded = false;
+        if (index >= 0) {
+          user.favoriteQuotes.splice(index, 1);
+          quote.favoritesCount--;
+        } else {
+          isAdded = true;
+          quote.favoritesCount++;
+          user.favoriteQuotes.push({
+            text: quote.text,
+            _id: quote._id,
+            author: quote.author,
+            imageUrl: quote.imageUrl,
+            favoritesCount: quote.favoritesCount
+          });
+        }
 
-
-            user.favoriteQuotes.push({
-              text: quote.text,
-              _id: quote._id,
-              author: quote.author,
-              imageUrl: quote.imageUrl,
-              favoritesCount: quote.favoritesCount
-            });
-            user.save(function() {
+        quote.save(function(err) {
+          user.save(function() {
+            //if isAdded
+            if (isAdded) {
               var newUpdate = new Update({
                 text: user.username + ' added to favorites:',
                 date: new Date(),
@@ -179,18 +187,19 @@ var quoteController = function(User, Quote, Update) {
                   favoritesCount: quote.favoritesCount
                 }
               });
+
               newUpdate.save();
+            }
+            res.json({
+              result: quote
             });
-          }
-          res.json({
-            result: quote
           });
-        });
+        })
       });
   };
 
   var random = function(req, res) {
-    var randomNumber = (Math.random()*1919) | 0;
+    var randomNumber = (Math.random() * 1919) | 0;
     console.log(randomNumber);
     Quote.find().limit(1).skip(randomNumber).exec(function(err, quotes) {
       if (err) {
