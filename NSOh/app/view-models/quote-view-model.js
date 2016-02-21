@@ -24,8 +24,8 @@ class Quote extends Observable {
       return fetchModule.fetch(url, {
           method: "GET",
           headers: {
-              "Content-Type": "application/json",
-              "Authorization": `bearer ${config.token}`
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${config.token}`
           }
         })
         .then(handleErrors)
@@ -64,6 +64,32 @@ class Quote extends Observable {
         });
     }
   }
+
+  markFavorite(id) {
+    if (!config.token) {
+      return Promise.reject("Not authenticated");
+    }
+    var that = this;
+    return fetch(`${config.apiUrl}/api/quotes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${config.token}`
+        }
+      })
+      .then(handleErrors)
+      .then(function(json) {
+        console.log(json);
+        return json.result;
+      })
+      .then(function(quote) {
+        var index = that.quotes.findIndex(q => q._id.toString() === quote._id.toString());
+        that.quotes[index].inFavorites = !that.quotes[index].inFavorites;
+      });
+  }
+
+
+}
 }
 
 function handleErrors(response) {
@@ -74,38 +100,6 @@ function handleErrors(response) {
   return response;
 }
 
-
-// function Quote(info) {
-//     info = info || {};
-//
-//     var quoteViewModel = new Observable({
-//         quoteText: info.quoteText || "",
-//         author: info.author || "",
-//         authorImageUrl: info.authorImageUrl || "",
-//         tags: info.tags || "",
-//         shared: info.shared || false
-//     });
-//
-//     quoteViewModel.createNew = function() {
-//         // Implement here the login http logic
-//         var promis = new Promise(
-//             function(resolve, reject) {
-//                 resolve("Quote created");
-//         });
-//         return promis;
-//     };
-//
-//     quoteViewModel.shareQuote = function() {
-//         // Implement here the register http logic
-//         var promis = new Promise(
-//             function(resolve, reject) {
-//                 resolve("Quote shared");
-//         });
-//         return promis;
-//     };
-//
-//     return quoteViewModel;
-// }
 
 module.exports = {
   create: function() {

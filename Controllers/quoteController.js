@@ -209,9 +209,11 @@ var quoteController = function(User, Quote, Update) {
         if (index >= 0) {
           user.favoriteQuotes.splice(index, 1);
           quote.favoritesCount--;
+          quote.inFavorites = false;
         } else {
           isAdded = true;
           quote.favoritesCount++;
+          quote.inFavorites = true;
           user.favoriteQuotes.push({
             text: quote.text,
             _id: quote._id,

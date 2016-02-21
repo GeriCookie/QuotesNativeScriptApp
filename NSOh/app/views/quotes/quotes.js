@@ -29,11 +29,18 @@ function goToQuotesList() {
 }
 
 function quotesListItemTap(args) {
-  var item = args.view.bindingContext;
-  console.dir(item);
-  var index = quotesFakeVm.quotesList.findIndex(i => i.quoteText === item.quoteText);
-  quotesFakeVm.quotesList.getItem(index).shared = !(quotesFakeVm.quotesList.getItem(index).shared);
-  quotesListView.refresh();
+  var sender = args.object;
+  var page = sender.page;
+  var vm = page.bindingContext;
+  var itemIndex = args.itemIndex;
+  var quote = vm.quotes.getItem(itemIndex);
+  vm.markFavorite(quote._id)
+    .catch(function(err){
+      frameModule.topmost().navigate("views/login/login");
+    }).then(function() {
+      quotesListView.refresh();
+    });
+
 }
 
 function onSwipeEnded(args) {

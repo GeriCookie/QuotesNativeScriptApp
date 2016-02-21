@@ -6,15 +6,12 @@ var Observable = require("data/observable").Observable;
 class UserViewModel extends Observable {
     constructor() {
         super();
-        console.log("******************");
-        console.log(this);
         this.username = "";
         this.password = "";
         this.imageUrl = "";
     }
 
     login() {
-        console.log('VM login');
         return fetch(config.apiUrl + "/api/users/auth", {
             method: "PUT",
             body: JSON.stringify({
