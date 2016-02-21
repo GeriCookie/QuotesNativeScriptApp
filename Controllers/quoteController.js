@@ -30,7 +30,7 @@ var quoteController = function(User, Quote, Update) {
           quote: {
             text: quote.text,
             author: quote.author,
-            authorImageUrl: quote.authorImageUrl, //must have dedault!!!!
+            imageUrl: quote.imageUrl, //must have dedault!!!!
             tags: quote.tags
           }
         });
@@ -78,7 +78,7 @@ var quoteController = function(User, Quote, Update) {
               _id: quote._id,
               text: quote.text,
               author: quote.author,
-              imageUrl: quote.authorImageUrl,
+              imageUrl: quote.imageUrl,
               tags: quote.tags,
               favoritesCount: quote.favoritesCount
             };
@@ -108,7 +108,7 @@ var quoteController = function(User, Quote, Update) {
           text: quote.text,
           author: quote.author,
           tags: quote.tags,
-          imageUrl: quote.authorImageUrl,
+          imageUrl: quote.imageUrl,
           favoritesCount: quote.favoritesCount
         };
         res.send({
@@ -150,7 +150,7 @@ var quoteController = function(User, Quote, Update) {
               text: quote.text,
               _id: quote._id,
               author: quote.author,
-              authorImageUrl: quote.authorImageUrl,
+              imageUrl: quote.imageUrl,
               favoritesCount: quote.favoritesCount
             });
             user.save(function() {
@@ -166,7 +166,7 @@ var quoteController = function(User, Quote, Update) {
                   text: quote.text,
                   _id: quote._id,
                   author: quote.author,
-                  authorImageUrl: quote.authorImageUrl,
+                  imageUrl: quote.imageUrl,
                   favoritesCount: quote.favoritesCount
                 }
               });
