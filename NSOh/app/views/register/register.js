@@ -2,6 +2,7 @@ var UserViewModel = require("../../view-models/user-view-model");
 var frameModule = require("ui/frame");
 var dialogsModule = require("ui/dialogs");
 var view = require("ui/core/view");
+var cameraModule = require("camera");
 var user = UserViewModel.create();
 var page;
 var topmost;
@@ -13,12 +14,23 @@ function pageLoaded(args) {
     page.bindingContext = user;
     user.set("username", "");
     user.set("password", "");
+    user.set("image", "");
 
     topmost = frameModule.topmost();
 
     title = view.getViewById(page, "title");
-    title.on("tap", function (args) {
+    title.on("tap", function(args) {
         topmost.navigate("views/initial/initial");
+    });
+}
+
+function takePicture() {
+    cameraModule.takePicture({
+        width: 100,
+        keepAspectRatio: true
+    }).then(function(picture) {
+        user.set("image", picture.toBase64String());
+        console.log(user.image);
     });
 }
 
@@ -46,3 +58,4 @@ function register() {
 
 exports.pageLoaded = pageLoaded;
 exports.register = register;
+exports.takePicture = takePicture;

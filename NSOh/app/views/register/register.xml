@@ -15,6 +15,7 @@
                 <Label text="register:" textWrap="true" class="title" />
                 <TextField id="username" hint="Your username" text="{{ username }}" keyboardType="email" autocorrect="false" />
                 <TextField id="password" hint="Your password" text="{{ password }}" secure="true" />
+                <Label text="Get your picture" tap="takePicture" class="log-registration-btn"/>
                 <Label text="Register with us" id="register-button" tap="register" class="log-registration-btn"/>
             </StackLayout>
         </drawer:rad-side-drawer.mainContent>

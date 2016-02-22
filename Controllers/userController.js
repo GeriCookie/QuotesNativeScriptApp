@@ -3,6 +3,7 @@ var userController = function(User) {
   var post = function(req, res) {
     var username = req.body.username,
       passHash = req.body.passHash,
+      image = req.body.image,
       query = {
         username: username.toLowerCase()
       };
@@ -23,6 +24,7 @@ var userController = function(User) {
         username: username.toLowerCase(),
         nickname: username,
         passHash: passHash,
+        image: image,
         token: (function(username) {
           var len = 60,
             chars = '0123456789',

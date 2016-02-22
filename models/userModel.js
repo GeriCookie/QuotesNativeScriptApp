@@ -5,6 +5,7 @@ var userModel = new Schema({
   username: String,
   nickname: String,
   passHash: String,
+  image: String,
   token: String,
   friends: [Schema.Types.Mixed],
   favoriteQuotes: [Schema.Types.Mixed]

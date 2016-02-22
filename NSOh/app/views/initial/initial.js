@@ -11,7 +11,7 @@ function pageLoaded(args) {
     quote.inFavorites = false;
     page.bindingContext = quote;
 }
-
+	
 function shareUnshareTap(args) {
     if (config.token) {
         quote.markFavorite(quote._id).then(function() {

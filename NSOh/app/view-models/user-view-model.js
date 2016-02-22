@@ -8,7 +8,7 @@ class UserViewModel extends Observable {
         super();
         this.username = "";
         this.password = "";
-        this.imageUrl = "";
+        this.image = "";
     }
 
     login() {
@@ -37,7 +37,7 @@ class UserViewModel extends Observable {
             body: JSON.stringify({
                 username: this.get("username"),
                 passHash: this.get("password"),
-                imageUrl: this.get("imageUrl")
+                image: this.get("image")
             }),
             headers: {
                 "Content-Type": "application/json"
