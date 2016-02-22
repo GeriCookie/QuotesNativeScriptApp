@@ -27,7 +27,6 @@
 }
 
 .quote {
-	margin-top: 20;
 	font-size: 40;
 	font-family: GreatVibes-Regular;
 }
@@ -60,6 +59,10 @@
 	background-size: 50% 50%;
 }
 
+.initialPage {
+	padding: 25;
+}
+
 .listView-quoteText {
 	font-size: 22;
 	horizontal-align: left;
@@ -70,11 +73,16 @@
 .listView-user {
 	font-size: 12;
 	font-family: Lobster;
+	padding-right: 10;
+	vertical-align: center;
+	
 }
 
 .listView-updateText {
 	font-size: 16;
 	font-family: Lobster;
+	padding-top: 10;
+
 }
 
 .listView-author {
@@ -96,10 +104,13 @@
 }
 
 .initialView-icon {
+	margin-top: 5;
+	margin-bottom: 5;
+	padding-right: 1;
 	font-family: fontawesome-webfont;
 	font-size: 25;
 	vertical-align: center;
-	horizontal-align: left;
+	horizontal-align: right;
 }
 
 .quote-grid-cell {
@@ -107,13 +118,20 @@
 	padding-bottom: 5;
 }
 
-.updateBtn {
+.folowBtn {
 	font-family: Lobster;
 	horizontal-align: center;
-	border-color: gray;
+	background-color: gray;
+	color: white;
 	border-width: 1;
 	font-size: 16;
-	padding: 5 10 5 10;
-	margin-top: 10;
-	margin-bottom: 30;
+	padding: 1 10 1 10;
+}
+
+.likeBtn {
+	font-family: fontawesome-webfont;
+	horizontal-align: right;
+	border-width: 1;
+	font-size: 16;
+	padding: 10;
 }

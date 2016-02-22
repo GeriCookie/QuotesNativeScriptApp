@@ -12,10 +12,10 @@
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
             <ScrollView>
-                <StackLayout class="pageStack">
+                <StackLayout class="pageStack initialPage">
+                    <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' class="initialView-icon" id="heart" tap="shareUnshareTap"/>
                     <Label text="{{text}}" textWrap="true" class="quote" />
                     <Label text="{{author}}" textWrap="true" class="author" />
-                    <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' class="initialView-icon" id="heart" tap="shareUnshareTap"/>
                 </StackLayout>
             </ScrollView>
         </drawer:rad-side-drawer.mainContent>
