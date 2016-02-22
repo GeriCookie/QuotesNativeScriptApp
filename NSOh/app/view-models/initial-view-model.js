@@ -40,8 +40,21 @@ class QuoteOfTheDay extends Observable {
         });
     }
 
-  markFavorite() {
-    // Implement here the logic for sharing unshearing this quote
+  markFavorite(id) {
+    var that = this;
+    return fetch(`${config.apiUrl}/api/quotes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${config.token}`
+        }
+      }).then(handleErrors)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        return json.result;
+      });
   }
 }
 

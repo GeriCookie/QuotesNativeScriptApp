@@ -22,7 +22,10 @@ function quotesListItemTap(args) {
   var sender = args.object;
   var quote = sender.bindingContext;
   if (config.token) {
-    vm.markFavorite(quote._id);
+    vm.markFavorite(quote._id).then(function() {
+      console.log(quote.inFavorites);
+    });
+    console.log(quote.inFavorites);
     quote.inFavorites = !quote.inFavorites;
   } else {
     frameModule.topmost().navigate("views/login/login");

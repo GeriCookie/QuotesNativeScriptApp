@@ -21,7 +21,6 @@
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
             <customControls:navigation/>
-            
         </drawer:rad-side-drawer.drawerContent>
     </drawer:rad-side-drawer>
 </Page>

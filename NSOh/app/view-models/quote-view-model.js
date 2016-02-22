@@ -12,7 +12,6 @@ class Quote extends Observable {
     this.quotes = new ObservableArray([]);
     this.currentPage = 0;
     this.loadQuotes();
-
   }
 
   loadQuotes() {
