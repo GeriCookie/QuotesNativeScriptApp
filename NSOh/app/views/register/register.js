@@ -5,18 +5,18 @@ var view = require("ui/core/view");
 var cameraModule = require("camera");
 var imageSource = require("image-source");
 var imageModule = require("ui/image");
-var user = UserViewModel.create();
+var user;
 var page;
 var topmost;
 var title;
 
 function pageLoaded(args) {
+    user = UserViewModel.create();
+    // user.set("username", "");
+    // user.set("password", "");
+    // user.set("image", "");
     page = args.object;
-
     page.bindingContext = user;
-    user.set("username", "");
-    user.set("password", "");
-    user.set("image", "");
 
     topmost = frameModule.topmost();
 
@@ -42,9 +42,9 @@ function takePicture() {
 }
 
 function completeRegistration() {
+    console.dir(user);
     user.register()
         .then(function() {
-            console.log("IN Complete registration");
             dialogsModule
                 .alert("Your account was successfully created.")
                 .then(function() {
@@ -59,7 +59,6 @@ function completeRegistration() {
 }
 
 function register() {
-    console.log("IN REGISTER");
     completeRegistration();
 }
 
