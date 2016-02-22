@@ -134,3 +134,10 @@
 	font-size: 16;
 	padding: 10;
 }
+
+.author-heading {
+	vertical-align: center;
+	margin-left: 10;
+	font-size: 20;
+	font-family: Lobster;
+}

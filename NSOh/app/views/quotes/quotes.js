@@ -47,6 +47,21 @@ function quotesListItemTap(args) {
   }
 }
 
+function authorPhotoTap(args) {
+  var sender = args.object;
+  var quote = sender.bindingContext;
+
+    var navigationEntry = {
+        moduleName: "views/quotesByAuthor/quotesByAuthor",
+        context: {
+          authorName: quote.author,
+          authorPicture: quote.imageUrl
+        },
+        animated: true
+    };
+    frameModule.topmost().navigate(navigationEntry);
+}
+
 function onSwipeEnded(args) {
   var sender = args.object;
   var page = sender.page;
@@ -83,3 +98,4 @@ exports.quotesListItemTap = quotesListItemTap;
 exports.onSwipeEnded = onSwipeEnded;
 exports.goToShared = goToShared;
 exports.loadMoreQuotes = loadMoreQuotes;
+exports.authorPhotoTap = authorPhotoTap;

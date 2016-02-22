@@ -17,7 +17,7 @@
                 </lv:RadListView.listViewLayout>
                 <lv:RadListView.itemTemplate>
                     <GridLayout rows="2*, *" columns="2*, 7*, 1*" class="quote-grid-cell">
-                        <Image src="{{imageUrl}}" stretch="aspectFill" row="0" col="0" rowSpan="2" class="listView-image" />
+                        <Image src="{{imageUrl}}" stretch="aspectFill" row="0" col="0" rowSpan="2" class="listView-image" tap="authorPhotoTap" />
                         <Label text="{{text}}" textWrap="true" row="0" col="1" class="listView-quoteText" />
                         <Label text="{{author}}" textWrap="true" row="1" col="1" class="listView-author" />
                         <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' row="0" col="2" rowSpan="2" class="listView-icon" id="heart" tap="quotesListItemTap"/>

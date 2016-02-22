@@ -35,7 +35,7 @@ function getQuotesByAuthor() {
     var allQuotesByAuthor;
 
     var navigationEntry = {
-        moduleName: "views/quotes/quotes",
+        moduleName: "views/quotesByAuthor/quotesByAuthor",
         context: allQuotesByAuthor,
         animated: true
     };
@@ -48,7 +48,7 @@ function getQuotesByTag(args) {
     var allQuotesByTag;
 
     var navigationEntry = {
-        moduleName: "views/quotes/quotes",
+        moduleName: "views/quotesByTag/quotesByTag",
         context: allQuotesByTag,
         animated: true
     };
