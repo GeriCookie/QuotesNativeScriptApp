@@ -38,7 +38,7 @@ function quotesListItemTap(args) {
   // var quote = vm.quotes.getItem(itemIndex);
   if (config.token) {
     vm.markFavorite(quote._id);
-    //quote.inFavorites = !quote.inFavorites;
+    quote.inFavorites = !quote.inFavorites;
     var quotesListView = view.getViewById(page, "quotesListView");
     //quotesListView.refresh();
   } else {
