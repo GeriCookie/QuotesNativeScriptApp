@@ -60,7 +60,10 @@
 }
 
 .initialPage {
-	padding: 25;
+	padding: 20;
+	background-image: url('~/images/backgroundWriting.png');
+	background-repeat: repeat;
+	background-size: 50% 50%;
 }
 
 .listView-quoteText {
@@ -75,7 +78,7 @@
 	font-family: Lobster;
 	padding-right: 10;
 	vertical-align: center;
-	
+
 }
 
 .listView-updateText {
