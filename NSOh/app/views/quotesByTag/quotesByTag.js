@@ -1,12 +1,8 @@
 'use strict'
-var QuoteViewModel = require("../../view-models/quote-view-model");
-var Observable = require("data/observable").Observable;
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var config = require("../../shared/config");
-var topmost;
-var quotesListView;
 var title;
 var vm;
 
@@ -48,15 +44,6 @@ function onPageNavigatedTo(args) {
     title.on("tap", function(args) {
         frameModule.topmost().navigate("views/initial/initial");
     });
-}
-
-
-function goToLogin() {
-    frameModule.topmost().navigate("views/login/login");
-}
-
-function goToQuotesList() {
-    frameModule.topmost().navigate("views/quotes/quotes");
 }
 
 function quotesListItemTap(args) {
@@ -113,15 +100,8 @@ function authorPhotoTap(args) {
     frameModule.topmost().navigate(navigationEntry);
 }
 
-function goToShared() {
-    frameModule.topmost().navigate("views/updates/updates");
-}
-
 exports.onPageNavigatedTo = onPageNavigatedTo;
-exports.goToLogin = goToLogin;
-exports.goToQuotesList = goToQuotesList;
 exports.quotesListItemTap = quotesListItemTap;
 exports.onSwipeEnded = onSwipeEnded;
-exports.goToShared = goToShared;
 exports.quotesListItemTap = quotesListItemTap;
 exports.authorPhotoTap = authorPhotoTap;

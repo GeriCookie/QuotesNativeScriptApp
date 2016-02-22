@@ -1,0 +1,7 @@
+<stackLayout id="drawer-content">
+    <Label text="Explore all quotes" tap="goToQuotesList" class="drowerBtn" />
+    <Label text="Shared by others" tap="goToShared" class="drowerBtn" />
+    <Label text="My followings" tap="goToMyFollowingList" class="drowerBtn" />
+    <Label text="My quotes" tap="goToQuotesList" class="drowerBtn" />
+    <Label text="Log in" tap="goToLogin" class="drowerBtn" />
+</stackLayout>

@@ -1,12 +1,8 @@
 'use strict'
 var QuoteViewModel = require("../../view-models/quote-view-model");
-var Observable = require("data/observable").Observable;
-var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var config = require("../../shared/config");
-var topmost;
-var quotesListView;
 var title;
 var vm;
 
@@ -20,25 +16,6 @@ function onPageLoaded(args) {
   title.on("tap", function(args) {
     frameModule.topmost().navigate("views/initial/initial");
   });
-}
-
-function goToMyFollowingList() {
-  console.log("in my following quotes");
-  if (config.token) {
-    console.log("in my following if quotes");
-    frameModule.topmost().navigate("views/my-following-updates/my-following-updates");
-  } else {
-    console.log("in my following else quotes");
-    frameModule.topmost().navigate("views/login/login");
-  }
-}
-
-function goToLogin() {
-  frameModule.topmost().navigate("views/login/login");
-}
-
-function goToQuotesList() {
-  frameModule.topmost().navigate("views/quotes/quotes");
 }
 
 function quotesListItemTap(args) {
@@ -83,10 +60,6 @@ function onSwipeEnded(args) {
   frameModule.topmost().navigate(navigationEntry);
 }
 
-function goToShared() {
-    frameModule.topmost().navigate("views/updates/updates");
-}
-
 function loadMoreQuotes(args) {
   vm.loadQuotes();
   var page = args.object.page;
@@ -96,11 +69,7 @@ function loadMoreQuotes(args) {
 }
 
 exports.onPageLoaded = onPageLoaded;
-exports.goToLogin = goToLogin;
-exports.goToQuotesList = goToQuotesList;
 exports.quotesListItemTap = quotesListItemTap;
 exports.onSwipeEnded = onSwipeEnded;
-exports.goToShared = goToShared;
 exports.loadMoreQuotes = loadMoreQuotes;
-exports.goToMyFollowingList = goToMyFollowingList;
 exports.authorPhotoTap = authorPhotoTap;

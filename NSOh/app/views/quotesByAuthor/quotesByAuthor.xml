@@ -1,4 +1,4 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" xmlns:lv="nativescript-telerik-ui/listview" navigatedTo="onPageNavigatedTo">
+<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" xmlns:lv="nativescript-telerik-ui/listview" xmlns:customControls="custom-components" navigatedTo="onPageNavigatedTo">
     <page.actionBar>
         <action-bar>
             <ActionBar.titleView>
@@ -36,13 +36,7 @@
             </stackLayout>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>
-            <stackLayout id="drawer-content">
-                <Label text="Explore all quotes" tap="goToQuotesList" class="drowerBtn" />
-                <Label text="Shared by others" tap="goToShared" class="drowerBtn" />
-                <Label text="My followings" tap="goToQuotesList" class="drowerBtn" />
-                <Label text="My quotes" tap="goToQuotesList" class="drowerBtn" />
-                <Label text="Log in" tap="goToLogin" class="drowerBtn" />
-            </stackLayout>
+            <customControls:navigation/>
         </drawer:rad-side-drawer.drawerContent>
     </drawer:rad-side-drawer>
 </Page>

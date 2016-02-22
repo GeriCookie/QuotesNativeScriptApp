@@ -1,16 +1,13 @@
 var UserViewModel = require("../../view-models/user-view-model");
 var frameModule = require("ui/frame");
-var quotesData = require("../../shared/quotes-data");
 var view = require("ui/core/view");
 var user = UserViewModel.create();
-var config = require('../../shared/config');
 var page;
 var topmost;
 var title;
 
 function pageLoaded(args) {
   page = args.object;
-
 
   page.bindingContext = user;
   topmost = frameModule.topmost();
@@ -34,33 +31,6 @@ function login() {
     });
 }
 
-function goToMyFollowingList() {
-  console.log("in my following login");
-  if (config.token) {
-    console.log("in my following if login");
-    frameModule.topmost().navigate("views/my-following-updates/my-following-updates");
-  } else {
-    console.log("in my following else login");
-    frameModule.topmost().navigate("views/login/login");
-  }
-}
-
-function goToLogin() {
-  topmost.navigate("views/login/login");
-}
-
-function goToQuotesList() {
-  topmost.navigate("views/quotes/quotes");
-}
-
-function goToShared() {
-  frameModule.topmost().navigate("views/updates/updates");
-}
-
 exports.pageLoaded = pageLoaded;
 exports.goToRegister = goToRegister;
 exports.login = login;
-exports.goToLogin = goToLogin;
-exports.goToQuotesList = goToQuotesList;
-exports.goToShared = goToShared;
-exports.goToMyFollowingList = goToMyFollowingList;
