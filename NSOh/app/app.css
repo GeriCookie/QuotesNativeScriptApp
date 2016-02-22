@@ -27,7 +27,6 @@
 }
 
 .quote {
-	margin-top: 20;
 	font-size: 40;
 	font-family: GreatVibes-Regular;
 }
@@ -58,6 +57,10 @@
 	background-image: url('~/images/backgroundWriting.png');
 	background-repeat: repeat;
 	background-size: 50% 50%;
+}
+
+.initialPage {
+	padding: 25;
 }
 
 .listView-quoteText {
@@ -96,10 +99,13 @@
 }
 
 .initialView-icon {
+	margin-top: 5;
+	margin-bottom: 5;
+	padding-right: 1;
 	font-family: fontawesome-webfont;
 	font-size: 25;
 	vertical-align: center;
-	horizontal-align: left;
+	horizontal-align: right;
 }
 
 .quote-grid-cell {
