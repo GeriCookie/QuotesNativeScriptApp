@@ -236,7 +236,7 @@ var quoteController = function(User, Quote, Update) {
                 date: new Date(),
                 user: {
                   username: user.username,
-                  userImageUrl: user.userImageUrl,
+                  image: user.image,
                   userId: user._id
                 },
                 quote: {

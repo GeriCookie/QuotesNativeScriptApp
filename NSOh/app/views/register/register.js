@@ -3,6 +3,8 @@ var frameModule = require("ui/frame");
 var dialogsModule = require("ui/dialogs");
 var view = require("ui/core/view");
 var cameraModule = require("camera");
+var imageSource = require("image-source");
+var imageModule = require("ui/image");
 var user = UserViewModel.create();
 var page;
 var topmost;
@@ -30,7 +32,12 @@ function takePicture() {
         keepAspectRatio: true
     }).then(function(picture) {
         user.set("image", picture.toBase64String());
-        console.log(user.image);
+        var hopatropa = new imageSource.ImageSource();
+        hopatropa.loadFromBase64(user.image);
+        var image = new imageModule.Image();
+        image.imageSource = hopatropa;
+        var parent = view.getViewById(page, 'stack');
+        parent.addChild(image);
     });
 }
 

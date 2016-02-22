@@ -37,6 +37,7 @@ class Update extends Observable {
         .then(function(newUpdates) {
           //console.dir(newUpdates);
           newUpdates.forEach(up => that.updates.push(new Observable(up)));
+          console.dir(that.updates.getItem(0).user);
         });
 
   }

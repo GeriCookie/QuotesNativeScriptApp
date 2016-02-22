@@ -11,7 +11,7 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <StackLayout class="pageStack">
+            <StackLayout class="pageStack" id="stack">
                 <Label text="register:" textWrap="true" class="title" />
                 <TextField id="username" hint="Your username" text="{{ username }}" keyboardType="email" autocorrect="false" />
                 <TextField id="password" hint="Your password" text="{{ password }}" secure="true" />
