@@ -1,0 +1,49 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" xmlns:drawer="nativescript-telerik-ui/sidedrawer" xmlns:lv="nativescript-telerik-ui/listview" loaded="onPageLoaded">
+    <page.actionBar>
+        <action-bar>
+           <ActionBar.titleView>
+                <Label text="QuotesApp" cssClass="custom-action-bar" id="title"/>
+            </ActionBar.titleView>
+        </action-bar>
+    </page.actionBar>
+    <drawer:rad-side-drawer id="drawer" drawerLocation="Left">
+        <drawer:rad-side-drawer.drawerTransition>
+            <drawer:PushTransition />
+        </drawer:rad-side-drawer.drawerTransition>
+        <drawer:rad-side-drawer.mainContent>
+            <lv:RadListView class="pageStack" items="{{ updates }}" loadMoreDataRequested="loadMoreUpdates" id="updatesListView">
+                <lv:RadListView.listViewLayout>
+                    <lv:ListViewLinearLayout scrollDirection="Vertical" />
+                </lv:RadListView.listViewLayout>
+                <lv:RadListView.itemTemplate>
+                    <GridLayout rows="auto, auto, auto, auto, auto" columns="2*, 7*" class="quote-grid-cell">
+                        <Image src="{{userImageUrl}}" stretch="aspectFill" row="0" col="0" rowSpan="2" class="listView-image" />
+                        <Label text="{{user.username}}" textWrap="true" row="0" col="1" class="listView-user" />
+                        <Label text="{{text}}" textWrap="true" row="1" col="1" class="listView-updateText" />
+                        <Label text="{{quote[0].text}}" textWrap="true" row="2" col="0" colSpan="2" class="listView-quoteText" />
+                        <Label text="{{quote[0].author}}" textWrap="true" row="3" col="1" class="listView-author" />
+                        <GridLayout rows="auto" columns="*,*,*" row="4" col="0" colSpan="2">
+                            <Label text="follow" tap="followUser" row="0" col="0" class="updateBtn"/>
+                            <Label text="like" tap="likeUpdate" row="0" col="1" class="updateBtn"/>
+                            <Label text="comment" tap="commentUpdate" row="0" col="2" class="updateBtn"/>
+                        </GridLayout>
+                    </GridLayout>
+                </lv:RadListView.itemTemplate>
+                <lv:RadListView.itemSwipeTemplate>
+                    <GridLayout columns="1*, 12*">
+                        <Button col="0" style="background-color: gray;" />
+                    </GridLayout>
+                </lv:RadListView.itemSwipeTemplate>
+            </lv:RadListView>
+        </drawer:rad-side-drawer.mainContent>
+        <drawer:rad-side-drawer.drawerContent>
+            <stackLayout id="drawer-content">
+                <Label text="Explore all quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="Shared by others" tap="goToShared" class="drowerBtn" />
+                <Label text="My followings" tap="goToMyFollowingList" class="drowerBtn" />
+                <Label text="My quotes" tap="goToQuotesList" class="drowerBtn" />
+                <Label text="Log in" tap="goToLogin" class="drowerBtn" />
+            </stackLayout>
+        </drawer:rad-side-drawer.drawerContent>
+    </drawer:rad-side-drawer>
+</Page>
