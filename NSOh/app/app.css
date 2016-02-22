@@ -1,14 +1,9 @@
-﻿button {
-    font-size: 16;
-    horizontal-align: center;
-    margin: 5;
-}
-
-.drowerBtn {
+﻿.drowerBtn {
 	horizontal-align: left;
 	margin: 10;
+	margin-top: 15;
 	font-family: Lobster;
-	font-size: 24;
+	font-size: 26;
 }
 
 .custom-action-bar {
@@ -16,61 +11,49 @@
 	font-size: 30;
 }
 
-.drowerContainer {
-	width: 200;
-}
-
-.message {
-    font-size: 20;
-    color: #284848;
-    horizontal-align: center;
-}
-
-.quote {
+.quote,
+.quote-details {
 	font-size: 40;
 	font-family: GreatVibes-Regular;
 }
 
-.quote-details {
-  font-size: 25
-
-}
-
 .author {
-	font-size: 14;
+	font-size: 16;
 	horizontal-align: right;
 	font-family: Lobster;
 }
 
 .tagsLabel, .tagsTags {
 	font-family: Lobster;
-	font-size: 14;
+	font-size: 16;
 	margin: 10;
 }
 
-.pageStack {
+.pageStack,
+.initialPage {
 	padding: 10;
 	background-image: url('~/images/backgroundWriting.png');
 	background-repeat: repeat;
 	background-size: 50% 50%;
 }
 
+.pageStack {
+	padding: 10;
+}
+
 .initialPage {
 	padding: 20;
-	background-image: url('~/images/backgroundWriting.png');
-	background-repeat: repeat;
-	background-size: 50% 50%;
 }
 
 .listView-quoteText {
-	font-size: 22;
+	font-size: 24;
 	horizontal-align: left;
 	font-family: GreatVibes-Regular;
 }
 
 .listView-author,
 .listView-user {
-	font-size: 12;
+	font-size: 16;
 	font-family: Lobster;
 	padding-right: 10;
 	vertical-align: center;
@@ -97,7 +80,7 @@
 
 .listView-icon {
 	font-family: fontawesome-webfont;
-	font-size: 25;
+	font-size: 30;
 	vertical-align: center;
 	horizontal-align: center;
 }
@@ -107,7 +90,7 @@
 	margin-bottom: 5;
 	padding-right: 1;
 	font-family: fontawesome-webfont;
-	font-size: 25;
+	font-size: 30;
 	vertical-align: center;
 	horizontal-align: right;
 }
@@ -131,7 +114,7 @@
 	font-family: fontawesome-webfont;
 	horizontal-align: right;
 	border-width: 1;
-	font-size: 16;
+	font-size: 20;
 	padding: 10;
 }
 
@@ -140,4 +123,21 @@
 	margin-left: 10;
 	font-size: 20;
 	font-family: Lobster;
+}
+
+.log-registration-btn {
+	font-size: 20;
+	font-family: Lobster;
+	horizontal-align: center;
+	padding: 10 20;
+	margin: 10;
+	background-color: gray;
+	color: white;
+}
+
+.title {
+	font-size: 20;
+	font-family: Lobster;
+	margin-top: 10;
+	margin-bottom: 10;
 }

@@ -12,10 +12,10 @@
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
             <StackLayout class="pageStack">
-                <Label text="register" textWrap="true" class="title" />
+                <Label text="register:" textWrap="true" class="title" />
                 <TextField id="username" hint="Your username" text="{{ username }}" keyboardType="email" autocorrect="false" />
                 <TextField id="password" hint="Your password" text="{{ password }}" secure="true" />
-                <Button text="register with us" id="register-button" tap="register" />
+                <Label text="Register with us" id="register-button" tap="register" class="log-registration-btn"/>
             </StackLayout>
         </drawer:rad-side-drawer.mainContent>
         <drawer:rad-side-drawer.drawerContent>

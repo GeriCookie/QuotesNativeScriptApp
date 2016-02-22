@@ -25,11 +25,11 @@ function loadMoreUpdates(args) {
     args.returnValue = true;
 }
 
-function followUser (args) {
-  var sender = args.object;
-  var update = sender.bindingContext;
-  console.log(update.userUsername + " followed");
-}
+// function followUser (args) {
+//   var sender = args.object;
+//   var update = sender.bindingContext;
+//   console.log(update.userUsername + " followed");
+// }
 
 function likeUpdate (args) {
   var sender = args.object;
@@ -37,15 +37,14 @@ function likeUpdate (args) {
   console.log(update._id + " liked");
 }
 
-function commentUpdate (args) {
-  var sender = args.object;
-  var update = sender.bindingContext;
-  console.log(update.text + " is to be commented");
-}
-
+// function commentUpdate (args) {
+//   var sender = args.object;
+//   var update = sender.bindingContext;
+//   console.log(update.text + " is to be commented");
+// }
 
 exports.onPageLoaded = onPageLoaded;
 exports.loadMoreUpdates = loadMoreUpdates;
-exports.followUser = followUser;
 exports.likeUpdate = likeUpdate;
-exports.commentUpdate = commentUpdate;
+// exports.followUser = followUser;
+// exports.commentUpdate = commentUpdate;
