@@ -11,18 +11,19 @@ class MyFollowingsUpdate extends Observable {
 
     this.updates = new ObservableArray([]);
     this.currentPage = 0;
-    this.loadUpdates();
+    this.loadMyFollowingUpdates();
 
   }
 
-  loadUpdates() {
+  loadMyFollowingUpdates() {
       this.currentPage += 1;
-      var url = `${config.apiUrl}/api/updates?page=${this.currentPage}`;
+      var url = `${config.apiUrl}/api/updates/following?page=${this.currentPage}`;
       let that = this;
       return fetchModule.fetch(url, {
           method: "GET",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${config.token}`
           }
         })
         .then(handleErrors)

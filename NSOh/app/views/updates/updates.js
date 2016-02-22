@@ -30,6 +30,17 @@ function goToLogin() {
     frameModule.topmost().navigate("views/login/login");
 }
 
+function goToMyFollowingList() {
+  console.log("in my following updates");
+  if (config.token) {
+    console.log("in my following if updates");
+    frameModule.topmost().navigate("views/my-following-updates/my-following-updates");
+  } else {
+    console.log("in my following else updates");
+    frameModule.topmost().navigate("views/login/login");
+  }
+}
+
 function goToQuotesList() {
     frameModule.topmost().navigate("views/quotes/quotes");
 }
@@ -68,3 +79,4 @@ exports.goToShared = goToShared;
 exports.loadMoreUpdates = loadMoreUpdates;
 exports.followUser = followUser;
 exports.likeUpdate = likeUpdate;
+exports.goToMyFollowingList = goToMyFollowingList;

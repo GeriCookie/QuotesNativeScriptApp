@@ -30,6 +30,17 @@ function goToShared() {
     frameModule.topmost().navigate("views/updates/updates");
 }
 
+function goToMyFollowingList() {
+  console.log("in my following details");
+  if (config.token) {
+    console.log("in my following if details");
+    frameModule.topmost().navigate("views/my-following-updates/my-following-updates");
+  } else {
+    console.log("in my following else details");
+    frameModule.topmost().navigate("views/login/login");
+  }
+}
+
 function getQuotesByAuthor() {
     // Implement get all quotes by the current author (author name available in vm.author)
     var allQuotesByAuthor;
@@ -61,3 +72,4 @@ exports.onNavigatedTo = onNavigatedTo;
 exports.goToShared = goToShared;
 exports.getQuotesByAuthor = getQuotesByAuthor;
 exports.getQuotesByTag = getQuotesByTag;
+exports.goToMyFollowingList = goToMyFollowingList;

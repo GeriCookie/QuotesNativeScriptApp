@@ -22,6 +22,16 @@ function onPageLoaded(args) {
   });
 }
 
+function goToMyFollowingList() {
+  console.log("in my following quotes");
+  if (config.token) {
+    console.log("in my following if quotes");
+    frameModule.topmost().navigate("views/my-following-updates/my-following-updates");
+  } else {
+    console.log("in my following else quotes");
+    frameModule.topmost().navigate("views/login/login");
+  }
+}
 
 function goToLogin() {
   frameModule.topmost().navigate("views/login/login");
@@ -83,3 +93,4 @@ exports.quotesListItemTap = quotesListItemTap;
 exports.onSwipeEnded = onSwipeEnded;
 exports.goToShared = goToShared;
 exports.loadMoreQuotes = loadMoreQuotes;
+exports.goToMyFollowingList = goToMyFollowingList;

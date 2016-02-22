@@ -4,6 +4,7 @@ var dialogsModule = require("ui/dialogs");
 var quotesData = require("../../shared/quotes-data");
 var view = require("ui/core/view");
 var user = UserViewModel.create();
+var config = require('../../shared/config');
 var page;
 var topmost;
 var title;
@@ -53,6 +54,17 @@ function register() {
     completeRegistration();
 }
 
+function goToMyFollowingList() {
+  console.log("in my following register");
+  if (config.token) {
+    console.log("in my following if register");
+    frameModule.topmost().navigate("views/my-following-updates/my-following-updates");
+  } else {
+    console.log("in my following else register");
+    frameModule.topmost().navigate("views/login/login");
+  }
+}
+
 function goToLogin() {
     topmost.navigate("views/login/login");
 }
@@ -70,3 +82,4 @@ exports.register = register;
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.goToShared = goToShared;
+exports.goToMyFollowingList = goToMyFollowingList;

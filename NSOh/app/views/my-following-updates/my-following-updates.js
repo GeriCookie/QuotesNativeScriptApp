@@ -39,9 +39,12 @@ function goToShared() {
 }
 
 function goToMyFollowingList() {
+  console.log("in my following my following");
   if (config.token) {
+    console.log("in my following if my following");
     frameModule.topmost().navigate("views/my-following-updates/my-following-updates");
   } else {
+    console.log("in my following else my following");
     frameModule.topmost().navigate("views/login/login");
   }
 }
@@ -84,3 +87,4 @@ exports.loadMoreUpdates = loadMoreUpdates;
 exports.followUser = followUser;
 exports.likeUpdate = likeUpdate;
 exports.commentUpdate = commentUpdate;
+exports.goToMyFollowingList = goToMyFollowingList;
