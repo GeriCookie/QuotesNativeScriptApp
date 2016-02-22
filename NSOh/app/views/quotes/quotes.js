@@ -43,18 +43,28 @@ function goToQuotesList() {
 
 function quotesListItemTap(args) {
   var sender = args.object;
-  var page = sender.page;
   var quote = sender.bindingContext;
-  // var itemIndex = args.itemIndex;
-  // var quote = vm.quotes.getItem(itemIndex);
   if (config.token) {
     vm.markFavorite(quote._id);
     quote.inFavorites = !quote.inFavorites;
-    var quotesListView = view.getViewById(page, "quotesListView");
-    //quotesListView.refresh();
   } else {
     frameModule.topmost().navigate("views/login/login");
   }
+}
+
+function authorPhotoTap(args) {
+  var sender = args.object;
+  var quote = sender.bindingContext;
+
+    var navigationEntry = {
+        moduleName: "views/quotesByAuthor/quotesByAuthor",
+        context: {
+          authorName: quote.author,
+          authorPicture: quote.imageUrl
+        },
+        animated: true
+    };
+    frameModule.topmost().navigate(navigationEntry);
 }
 
 function onSwipeEnded(args) {
@@ -71,7 +81,6 @@ function onSwipeEnded(args) {
     animated: true
   };
   frameModule.topmost().navigate(navigationEntry);
-
 }
 
 function goToShared() {
@@ -94,3 +103,4 @@ exports.onSwipeEnded = onSwipeEnded;
 exports.goToShared = goToShared;
 exports.loadMoreQuotes = loadMoreQuotes;
 exports.goToMyFollowingList = goToMyFollowingList;
+exports.authorPhotoTap = authorPhotoTap;

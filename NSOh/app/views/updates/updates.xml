@@ -11,7 +11,7 @@
             <drawer:PushTransition />
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
-            <lv:RadListView class="pageStack" items="{{ updates }}" loadMoreDataRequested="loadMoreUpdates" id="updatesListView">
+            <lv:RadListView class="pageStack" items="{{ updates }}" loadOnDemandMode="Auto" loadMoreDataRequested="loadMoreUpdates" id="updatesListView">
                 <lv:RadListView.listViewLayout>
                     <lv:ListViewLinearLayout scrollDirection="Vertical" />
                 </lv:RadListView.listViewLayout>

@@ -48,10 +48,6 @@
 	margin: 10;
 }
 
-.tagsTags {
-	
-}
-
 .pageStack {
 	padding: 10;
 	background-image: url('~/images/backgroundWriting.png');
@@ -137,4 +133,11 @@
 	border-width: 1;
 	font-size: 16;
 	padding: 10;
+}
+
+.author-heading {
+	vertical-align: center;
+	margin-left: 10;
+	font-size: 20;
+	font-family: Lobster;
 }

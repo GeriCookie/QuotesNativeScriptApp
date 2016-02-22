@@ -42,12 +42,12 @@ function goToMyFollowingList() {
 }
 
 function getQuotesByAuthor() {
-    // Implement get all quotes by the current author (author name available in vm.author)
-    var allQuotesByAuthor;
-
     var navigationEntry = {
-        moduleName: "views/quotes/quotes",
-        context: allQuotesByAuthor,
+        moduleName: "views/quotesByAuthor/quotesByAuthor",
+        context: {
+            authorName: vm.author,
+            authorPicture: vm.imageUrl
+        },
         animated: true
     };
     frameModule.topmost().navigate(navigationEntry);
@@ -55,12 +55,11 @@ function getQuotesByAuthor() {
 
 function getQuotesByTag(args) {
     var tag = args.object.text;
-    // Implement get all quotes by the given tag
-    var allQuotesByTag;
-
     var navigationEntry = {
-        moduleName: "views/quotes/quotes",
-        context: allQuotesByTag,
+        moduleName: "views/quotesByTag/quotesByTag",
+        context: {
+            tag: tag
+        },
         animated: true
     };
     frameModule.topmost().navigate(navigationEntry);
