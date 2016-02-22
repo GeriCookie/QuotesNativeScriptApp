@@ -39,7 +39,7 @@ function goToShared() {
 }
 
 function loadMoreUpdates(args) {
-    // load more updates here
+    vm.loadUpdates();
     var page = args.object.page;
     var updatesListView = view.getViewById(page, "updatesListView");
     updatesListView.notifyLoadOnDemandFinished();
