@@ -4,6 +4,9 @@ var Observable = require("data/observable").Observable;
 var ObservableArray = require('data/observable-array').ObservableArray;
 var fetchModule = require('fetch');
 var config = require('../shared/config');
+var imageSource = require("image-source");
+var fs = require("file-system");
+var enums = require("ui/enums");
 
 class Update extends Observable {
     constructor() {
@@ -29,18 +32,20 @@ class Update extends Observable {
             .then(function(response) {
                 return response.json();
             })
-            // .then(function(json) {
-            //   console.dir("HEREEEE");
-            //   console.dir(json);
-            //   return json.result;
-            // })
             .then(function(newUpdates) {
-                //console.dir(newUpdates);
-                newUpdates.forEach(up => that.updates.push(new Observable(up)));
-                // newUpdates.forEach(function(up) {
-                //     up.userImageUrl = up.user.image;
-                //     that.updates.push(new Observable(up));
-                // });
+                newUpdates.forEach(function(up) {
+                    if (up.user.image) {
+                        var hopatropa = new imageSource.ImageSource();
+                        hopatropa.loadFromBase64(up.user.image);
+                        var folder = fs.knownFolders.documents();
+                        var imageName = up.user.username + ".png";
+                        var path = fs.path.join(folder.path, imageName);
+                        var saved = hopatropa.saveToFile(path, enums.ImageFormat.png);
+                        up.userImageUrl = path;
+                    }
+
+                    that.updates.push(new Observable(up));
+                });
             });
 
     }
