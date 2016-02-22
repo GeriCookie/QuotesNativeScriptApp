@@ -35,7 +35,7 @@ class Quote extends Observable {
           return json.result;
         })
         .then(function(newQuotes) {
-          newQuotes.forEach(q => that.quotes.push(q));
+          newQuotes.forEach(q => that.quotes.push(new Observable(q)));
         });
     } else {
       this.currentPage += 1;
@@ -52,7 +52,7 @@ class Quote extends Observable {
           return json.result;
         })
         .then(function(newQuotes) {
-          newQuotes.forEach(q => that.quotes.push(q));
+          newQuotes.forEach(q => that.quotes.push(new Observable(q)));
         });
     }
   }
