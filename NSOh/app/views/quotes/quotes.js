@@ -22,6 +22,7 @@ function onPageLoaded(args) {
   });
 }
 
+
 function goToLogin() {
   frameModule.topmost().navigate("views/login/login");
 }
