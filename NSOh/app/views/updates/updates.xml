@@ -18,10 +18,10 @@
                 <lv:RadListView.itemTemplate>
                     <GridLayout rows="auto, auto, auto, auto, auto" columns="2*, 7*" class="quote-grid-cell">
                         <Image src="{{userImageUrl}}" stretch="aspectFill" row="0" col="0" rowSpan="2" class="listView-image" />
-                        <Label text="{{userUsername}}" textWrap="true" row="0" col="1" class="listView-user" />
+                        <Label text="{{user.username}}" textWrap="true" row="0" col="1" class="listView-user" />
                         <Label text="{{text}}" textWrap="true" row="1" col="1" class="listView-updateText" />
-                        <Label text="{{quoteText}}" textWrap="true" row="2" col="0" colSpan="2" class="listView-quoteText" />
-                        <Label text="{{quoteAuthor}}" textWrap="true" row="3" col="1" class="listView-author" />
+                        <Label text="{{quote[0].text}}" textWrap="true" row="2" col="0" colSpan="2" class="listView-quoteText" />
+                        <Label text="{{quote[0].author}}" textWrap="true" row="3" col="1" class="listView-author" />
                         <GridLayout rows="auto" columns="*,*,*" row="4" col="0" colSpan="2">
                             <Label text="follow" tap="followUser" row="0" col="0" class="updateBtn"/>
                             <Label text="like" tap="likeUpdate" row="0" col="1" class="updateBtn"/>

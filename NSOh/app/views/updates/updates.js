@@ -1,5 +1,5 @@
 'use strict'
-var QuoteViewModel = require("../../view-models/quote-view-model");
+var UpdateViewModel = require("../../view-models/updates-view-model");
 var Observable = require("data/observable").Observable;
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
@@ -13,36 +13,12 @@ var vm;
 
 function onPageLoaded(args) {
     var page = args.object;
+    vm = UpdateViewModel.create();
+    page.bindingContext = vm;
     //init vm
 
-    // Currently mocking with fake data
-    var update1 = {
-        text: "Hate cannot drive out hate: only love can do that.",
-        userUsername: "Martin Luther King Jr.",
-        userImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        _id: "1",
-        quoteAuthor: "Luther",
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\""
-    };
-
-    var update2 = {
-        text: "Another very clever writing.",
-        userUsername: "Martin Luther King Jr.",
-        userImageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        _id: "2",
-        quoteAuthor: "Luther",
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\""
-    };
-
-    var updates = [];
-    updates.push(update1);
-    updates.push(update2);
-    var updates = new ObservableArray(updates);
-    vm = {
-      updates: updates
-    };
-
-    page.bindingContext = vm;
+    // Currently mocking with fake dat
+    //console.log(vm.updates.user.username);
 
     title = view.getViewById(page, "title");
     title.on("tap", function(args) {
