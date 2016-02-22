@@ -31,12 +31,12 @@ function goToShared() {
 }
 
 function getQuotesByAuthor() {
-    // Implement get all quotes by the current author (author name available in vm.author)
-    var allQuotesByAuthor;
-
     var navigationEntry = {
         moduleName: "views/quotesByAuthor/quotesByAuthor",
-        context: allQuotesByAuthor,
+        context: {
+            authorName: vm.author,
+            authorPicture: vm.imageUrl
+        },
         animated: true
     };
     frameModule.topmost().navigate(navigationEntry);
@@ -44,12 +44,11 @@ function getQuotesByAuthor() {
 
 function getQuotesByTag(args) {
     var tag = args.object.text;
-    // Implement get all quotes by the given tag
-    var allQuotesByTag;
-
     var navigationEntry = {
         moduleName: "views/quotesByTag/quotesByTag",
-        context: allQuotesByTag,
+        context: {
+            tag: tag
+        },
         animated: true
     };
     frameModule.topmost().navigate(navigationEntry);

@@ -33,15 +33,10 @@ function goToQuotesList() {
 
 function quotesListItemTap(args) {
   var sender = args.object;
-  var page = sender.page;
   var quote = sender.bindingContext;
-  // var itemIndex = args.itemIndex;
-  // var quote = vm.quotes.getItem(itemIndex);
   if (config.token) {
     vm.markFavorite(quote._id);
     quote.inFavorites = !quote.inFavorites;
-    var quotesListView = view.getViewById(page, "quotesListView");
-    //quotesListView.refresh();
   } else {
     frameModule.topmost().navigate("views/login/login");
   }
@@ -76,7 +71,6 @@ function onSwipeEnded(args) {
     animated: true
   };
   frameModule.topmost().navigate(navigationEntry);
-
 }
 
 function goToShared() {

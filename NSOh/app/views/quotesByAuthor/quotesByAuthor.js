@@ -16,7 +16,7 @@ function onPageNavigatedTo(args) {
     console.dir(page.navigationContext);
     var author = page.navigationContext.authorName;
     var imageUrl = page.navigationContext.authorPicture;
-    // Implement get all quotes by the current author (get it by author name)
+    // Implement get all quotes by the current author (get them by author name)
     // Below I am using mocked data
     var quote = {
         quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
