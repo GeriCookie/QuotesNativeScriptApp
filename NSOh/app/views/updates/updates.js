@@ -50,7 +50,7 @@ function followUser (args) {
   var sender = args.object;
   var page = sender.page;
   var update = sender.bindingContext;
-  console.log(update.userUsername + " followed");
+  console.log(update.user.username + " followed");
 }
 
 function likeUpdate (args) {
@@ -58,13 +58,6 @@ function likeUpdate (args) {
   var page = sender.page;
   var update = sender.bindingContext;
   console.log(update._id + " liked");
-}
-
-function commentUpdate (args) {
-  var sender = args.object;
-  var page = sender.page;
-  var update = sender.bindingContext;
-  console.log(update.text + " is to be commented");
 }
 
 
@@ -75,4 +68,3 @@ exports.goToShared = goToShared;
 exports.loadMoreUpdates = loadMoreUpdates;
 exports.followUser = followUser;
 exports.likeUpdate = likeUpdate;
-exports.commentUpdate = commentUpdate;
