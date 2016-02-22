@@ -4,6 +4,8 @@ var userController = function(User) {
     var username = req.body.username,
       passHash = req.body.passHash,
       image = req.body.image,
+      console.log("*************************************************");
+      console.log("image server " + image);
       query = {
         username: username.toLowerCase()
       };

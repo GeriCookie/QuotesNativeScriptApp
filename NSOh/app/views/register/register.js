@@ -5,6 +5,8 @@ var view = require("ui/core/view");
 var cameraModule = require("camera");
 var imageSource = require("image-source");
 var imageModule = require("ui/image");
+var config = require('../../shared/config');
+var imageString;
 var user;
 var page;
 var topmost;
@@ -32,6 +34,7 @@ function takePicture() {
         keepAspectRatio: true
     }).then(function(picture) {
         user.set("image", picture.toBase64String());
+        imageString = picture.toBase64String();
         var hopatropa = new imageSource.ImageSource();
         hopatropa.loadFromBase64(user.image);
         var image = new imageModule.Image();
@@ -42,8 +45,7 @@ function takePicture() {
 }
 
 function completeRegistration() {
-    console.dir(user);
-    user.register()
+    registerURL()
         .then(function() {
             dialogsModule
                 .alert("Your account was successfully created.")
@@ -61,6 +63,35 @@ function completeRegistration() {
 function register() {
     completeRegistration();
 }
+
+function registerURL() {
+    return fetch(config.apiUrl + "/api/users", {
+        method: "POST",
+        body: JSON.stringify({
+            username: user.get("username"),
+            passHash: user.get("password"),
+            image: imageString
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(handleErrors)
+    .then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        config.token = data.token;
+    });
+}
+
+function handleErrors(response) {
+	if (!response.ok) {
+		console.log(JSON.stringify(response));
+		throw Error(response.statusText);
+	}
+	return response;
+}
+
 
 exports.pageLoaded = pageLoaded;
 exports.register = register;
