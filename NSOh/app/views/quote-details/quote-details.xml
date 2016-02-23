@@ -13,6 +13,7 @@
         <drawer:rad-side-drawer.mainContent>
             <ScrollView>
                 <StackLayout class="pageStack">
+                    <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' class="initialView-icon" id="heart" tap="shareUnshareTap"/>
                     <Label text="{{text}}" textWrap="true" class="quote-details" />
                     <Label text="{{author}}" textWrap="true" class="author" tap="getQuotesByAuthor" />
                     <Label col="0" text="tags: " textWrap="true" class="tagsLabel" />

@@ -73,7 +73,6 @@ class QuoteOfTheDay extends Observable {
 
   markFavorite(id) {
     var that = this;
-    console.log("I'm here");
     return fetch(`${config.apiUrl}/api/quotes/${id}`, {
         method: "PUT",
         headers: {
