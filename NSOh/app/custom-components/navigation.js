@@ -24,7 +24,20 @@ function goToMyFollowingList() {
   }
 }
 
+function goToMyQuotesList() {
+  console.log("in my following initial");
+  if (config.token) {
+    console.log("in my following if initial");
+    frameModule.topmost().navigate("views/my-quotes/my-quotes");
+  } else {
+    console.log("in my following else initial");
+    frameModule.topmost().navigate("views/login/login");
+  }
+}
+
+
 exports.goToLogin = goToLogin;
 exports.goToQuotesList = goToQuotesList;
 exports.goToShared = goToShared;
 exports.goToMyFollowingList = goToMyFollowingList;
+exports.goToMyQuotesList = goToMyQuotesList;
