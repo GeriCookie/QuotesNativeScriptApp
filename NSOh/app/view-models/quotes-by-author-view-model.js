@@ -19,7 +19,7 @@ class QuoteByAuthor extends Observable {
     this.currentPage += 1;
     var author = this.author.replace(" ","%20");
     var url = `${config.apiUrl}/api/quotes?author=${author}&page=${this.currentPage}`;
-    console.log(url);
+    //console.log(url);
     let that = this;
     return fetchModule.fetch(url, {
         method: "GET",
@@ -35,7 +35,7 @@ class QuoteByAuthor extends Observable {
         return json.result;
       })
       .then(function(newQuotes) {
-        console.dir(newQuotes);
+  //      console.dir(newQuotes);
         newQuotes.forEach(q => that.quotes.push(new Observable(q)));
 
       });
@@ -43,6 +43,7 @@ class QuoteByAuthor extends Observable {
 
   markFavorite(id) {
     var that = this;
+    console.log("in mark favorite author");
     return fetch(`${config.apiUrl}/api/quotes/${id}`, {
         method: "PUT",
         headers: {

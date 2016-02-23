@@ -30,6 +30,7 @@ function quotesListItemTap(args) {
     var quote = sender.bindingContext;
 
     if (config.token) {
+        console.log("In favorite" + quote._id);
         vm.markFavorite(quote._id);
         quote.inFavorites = !quote.inFavorites;
     } else {

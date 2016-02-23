@@ -183,6 +183,36 @@ var quoteController = function(User, Quote, Update) {
       });
   };
 
+  var getByIdAuth = function(req, res) {
+    var user = req.user;
+    Quote.findById(req.params.id)
+      .exec(function(err, quote) {
+        if (err) {
+          return res.status(500)
+            .send(err);
+        }
+        if (!quote) {
+          return res.status(404)
+            .send({
+              message: "Quote not found"
+            });
+        }
+
+        var quoteDetails = {
+          _id: quote._id,
+          text: quote.text,
+          author: quote.author,
+          tags: quote.tags,
+          imageUrl: quote.imageUrl,
+          favoritesCount: quote.favoritesCount,
+          inFavorites: !!(user.favoriteQuotes.find(q => q._id.toString() === quote._id.toString()))
+        };
+        res.send({
+          result: quoteDetails
+        });
+      });
+  };
+
   var addToFavorites = function(req, res) {
     var user = req.user;
     Quote.findById(req.params.id)
@@ -289,13 +319,48 @@ var quoteController = function(User, Quote, Update) {
     });
   }
 
+  var randomAuth = function(req, res) {
+    var user = req.user;
+    var randomNumber = (Math.random() * 1919) | 0;
+    console.log(randomNumber);
+    Quote.find().limit(1).skip(randomNumber).exec(function(err, quotes) {
+      if (err) {
+        return res.status(500)
+          .send(err);
+      }
+
+      var quote = quotes[0];
+      if (!quote) {
+        return res.status(404)
+          .send({
+            message: "Quote not found"
+          });
+      }
+
+      var quoteDetails = {
+        _id: quote._id,
+        text: quote.text,
+        author: quote.author,
+        tags: quote.tags,
+        imageUrl: quote.imageUrl,
+        favoritesCount: quote.favoritesCount,
+        inFavorites: !!(user.favoriteQuotes.find(q => q._id.toString() === quote._id.toString()))
+      };
+      res.send({
+        result: quoteDetails
+      });
+    });
+  }
+
   return {
     post: post,
     get: get,
     getAuth: getAuth,
     getById: getById,
     addToFavorites: addToFavorites,
-    random: random
+    random: random,
+    randomAuth: randomAuth,
+    getByIdAuth: getByIdAuth
   };
 };
 

@@ -12,8 +12,8 @@
         </drawer:rad-side-drawer.drawerTransition>
         <drawer:rad-side-drawer.mainContent>
             <stackLayout class="pageStack">
-                <StackLayout orientation="horizontal">
-                    <Image src="{{quotes.imageUrl}}" stretch="aspectFill" class="listView-image" />
+                <StackLayout orientation="horizontal" items="{{ quotes }}">
+                    <Image src="{{imageUrl}}" stretch="aspectFill" class="listView-image" />
                     <Label text="{{'All quotes by ' + author}}" class="author-heading"/>
                 </StackLayout>
                 <lv:RadListView items="{{ quotes }}" loadMoreDataRequested="loadMoreQuotes" swipeCells="true" itemSwipeProgressEnded="onSwipeEnded" id="quotesListView">
