@@ -3,6 +3,7 @@ var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 var view = require("ui/core/view");
 var config = require("../../shared/config");
+var QuotesByTagViewModel = require("../../view-models/quotes-by-tag-view-model");
 var title;
 var vm;
 
@@ -11,32 +12,7 @@ function onPageNavigatedTo(args) {
     var page = args.object;
     var tag = page.navigationContext.tag;
 
-    // Implement get all quotes by the current tag
-    // Below I am using mocked data
-    var quote = {
-        quoteText: "\"Hate cannot drive out hate: only love can do that.\"",
-        author: "Martin Luther King Jr.",
-        imageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: true,
-        tags: "freedom"
-    };
-
-    var quote2 = {
-        quoteText: "\"Another very clever writing.\"",
-        author: "Martin Luther King Jr.",
-        imageUrl: "http://d.alternativeto.net/dist/icons/nativescript_77321.jpg?width=64&height=64&mode=crop&upscale=false",
-        shared: true,
-        tags: "fight"
-    };
-    var quotes = [];
-    quotes.push(quote);
-    quotes.push(quote2);
-    var observableQuotes = new ObservableArray(quotes);
-    //init vm
-    vm = {
-      tag: tag,
-      quotes: observableQuotes
-    };
+    vm = QuotesByTagViewModel.create(tag);
 
     page.bindingContext = vm;
 

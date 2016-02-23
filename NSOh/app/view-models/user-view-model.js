@@ -34,7 +34,7 @@ class UserViewModel extends Observable {
     register() {
         console.log("*************************************************");
         console.log("In view Model");
-        console.log(this.get("image"));
+        
         return fetch(config.apiUrl + "/api/users", {
             method: "POST",
             body: JSON.stringify({

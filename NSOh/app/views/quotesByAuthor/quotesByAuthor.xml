@@ -13,7 +13,7 @@
         <drawer:rad-side-drawer.mainContent>
             <stackLayout class="pageStack">
                 <StackLayout orientation="horizontal">
-                    <Image src="{{imageUrl}}" stretch="aspectFill" class="listView-image" />
+                    <Image src="{{quotes.imageUrl}}" stretch="aspectFill" class="listView-image" />
                     <Label text="{{'All quotes by ' + author}}" class="author-heading"/>
                 </StackLayout>
                 <lv:RadListView items="{{ quotes }}" loadMoreDataRequested="loadMoreQuotes" swipeCells="true" itemSwipeProgressEnded="onSwipeEnded" id="quotesListView">
@@ -22,7 +22,7 @@
                     </lv:RadListView.listViewLayout>
                     <lv:RadListView.itemTemplate>
                         <GridLayout rows="2*, *" columns="7*, 1*" class="quote-grid-cell">
-                            <Label text="{{quoteText}}" textWrap="true" row="0" col="0" class="listView-quoteText" />
+                            <Label text="{{text}}" textWrap="true" row="0" col="0" class="listView-quoteText" />
                             <Label text="{{author}}" textWrap="true" row="1" col="0" class="listView-author" />
                             <Label text='{{inFavorites ? "&#xf004;" : "&#xf08a;"}}' row="0" col="1" rowSpan="2" class="listView-icon" id="heart" tap="quotesListItemTap" />
                         </GridLayout>
