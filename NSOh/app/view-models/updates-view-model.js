@@ -9,59 +9,77 @@ var fs = require("file-system");
 var enums = require("ui/enums");
 
 class Update extends Observable {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.updates = new ObservableArray([]);
-        this.currentPage = 0;
-        this.loadUpdates();
+    this.updates = new ObservableArray([]);
+    this.currentPage = 0;
+    this.loadUpdates();
 
-    }
+  }
 
-    loadUpdates() {
-        this.currentPage += 1;
-        var url = `${config.apiUrl}/api/updates?page=${this.currentPage}`;
-        let that = this;
-        return fetchModule.fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(handleErrors)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(newUpdates) {
-                newUpdates.forEach(function(up) {
-                    if (up.user.image) {
-                        var hopatropa = new imageSource.ImageSource();
-                        hopatropa.loadFromBase64(up.user.image);
-                        var folder = fs.knownFolders.documents();
-                        var imageName = up.user.username + ".png";
-                        var path = fs.path.join(folder.path, imageName);
-                        var saved = hopatropa.saveToFile(path, enums.ImageFormat.png);
-                        up.userImageUrl = path;
-                    }
+  loadUpdates() {
+    this.currentPage += 1;
+    var url = `${config.apiUrl}/api/updates?page=${this.currentPage}`;
+    let that = this;
+    return fetchModule.fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(handleErrors)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(newUpdates) {
+        newUpdates.forEach(function(up) {
+          if (up.user.image) {
+            var hopatropa = new imageSource.ImageSource();
+            hopatropa.loadFromBase64(up.user.image);
+            var folder = fs.knownFolders.documents();
+            var imageName = up.user.username + ".png";
+            var path = fs.path.join(folder.path, imageName);
+            var saved = hopatropa.saveToFile(path, enums.ImageFormat.png);
+            up.userImageUrl = path;
+          }
 
-                    that.updates.push(new Observable(up));
-                });
-            });
+          that.updates.push(new Observable(up));
+        });
+      });
 
-    }
+  }
+
+  followUser(id) {
+    var that = this;
+    return fetch(`${config.apiUrl}/api/users/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${config.token}`
+        }
+      }).then(handleErrors)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        return json.result;
+      });
+
+  }
 }
 
 function handleErrors(response) {
-    if (!response.ok) {
-        console.log(JSON.stringify(response));
-        throw Error(response.statusText);
-    }
-    return response;
+  if (!response.ok) {
+    console.log(JSON.stringify(response));
+    throw Error(response.statusText);
+  }
+  return response;
 }
 
 
 module.exports = {
-    create: function() {
-        return new Update();
-    }
+  create: function() {
+    return new Update();
+  }
 };

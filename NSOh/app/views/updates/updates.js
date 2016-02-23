@@ -29,7 +29,7 @@ function followUser (args) {
   var sender = args.object;
   var update = sender.bindingContext;
   console.log(update.user.userId);
-  console.log(update.user.username + " followed");
+  vm.followUser(update.user.userId);
 }
 
 function likeUpdate (args) {
