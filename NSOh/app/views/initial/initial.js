@@ -14,10 +14,9 @@ function pageLoaded(args) {
 
 function shareUnshareTap(args) {
     if (config.token) {
-        quote.markFavorite(quote._id);
-        console.log("In favorite");
-        quote.inFavorites = !quote.inFavorites;
-
+        quote.markFavorite(quote._id).then(function(inFavorites) {
+            quote.inFavorites = inFavorites;
+        });
     } else {
         frameModule.topmost().navigate("views/login/login");
     }
