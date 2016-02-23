@@ -13,11 +13,35 @@ class QuoteOfTheDay extends Observable {
         this.imageUrl = "";
         this.tags = [];
         this.favoritesCount = "";
+        this.inFavorites = "";
         this.loadQuoteOfTheDay();
 
     }
 
     loadQuoteOfTheDay() {
+      if (config.token) {
+        var url = `${config.apiUrl}/api/quotes/random/auth`;
+        let that = this;
+        return fetchModule.fetch(url, {
+            method: "GET"
+        })
+        .then(handleErrors)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(json) {
+            return json.result;
+        })
+        .then(function(quoteOfTheDay) {
+            that.set("_id", quoteOfTheDay._id);
+            that.set("text", quoteOfTheDay.text);
+            that.set("author", quoteOfTheDay.author);
+            that.set("imageUrl", quoteOfTheDay.imageUrl);
+            that.set("tags", quoteOfTheDay.tags);
+            that.set("favoritesCount", quoteOfTheDay.favoritesCount);
+            that.set("isFavorite", quoteOfTheDay.inFavorites);
+        });
+      } else {
         var url = `${config.apiUrl}/api/quotes/random`;
         let that = this;
         return fetchModule.fetch(url, {
@@ -39,7 +63,7 @@ class QuoteOfTheDay extends Observable {
             that.set("favoritesCount", quoteOfTheDay.favoritesCount);
         });
     }
-
+}
   markFavorite(id) {
     var that = this;
     return fetch(`${config.apiUrl}/api/quotes/${id}`, {

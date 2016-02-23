@@ -23,6 +23,7 @@ var routes = function(User, Quote, Update) {
     .get('/:id/auth', auth(), quoteController.getByIdAuth)
     .put('/:id', auth(), quoteController.addToFavorites);
 
+
   return quoteRouter;
 };
 module.exports = routes;
