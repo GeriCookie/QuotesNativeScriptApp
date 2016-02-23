@@ -252,6 +252,7 @@ var quoteController = function(User, Quote, Update) {
             _id: quote._id,
             author: quote.author,
             imageUrl: quote.imageUrl,
+            inFavorites: !!(user.favoriteQuotes.find(q => q._id.toString() === quote._id.toString())),
             favoritesCount: quote.favoritesCount,
             dateAdded: new Date()
           });
@@ -281,7 +282,7 @@ var quoteController = function(User, Quote, Update) {
               newUpdate.save();
             }
             res.json({
-              result: quote
+              result: {inFavorites: !!(user.favoriteQuotes.find(q => q._id.toString() === quote._id.toString()))}
             });
           });
         })
